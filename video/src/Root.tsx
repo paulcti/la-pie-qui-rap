@@ -2,6 +2,7 @@ import './index.css';
 import { Composition } from 'remotion';
 import { IlsMentheVisualizer } from './IlsMenthe';
 import { ArtistIntro, ArtistIntroProps } from './ArtistIntro';
+import { Packshot } from './Packshot';
 
 /* ──────────────────────────────────────────────────────────────────
    Roster — 6 artistes signés sur La Pie Records
@@ -85,6 +86,16 @@ export const RemotionRoot: React.FC = () => {
         fps={VISUALIZER_FPS}
         width={1080}
         height={1920}
+      />
+
+      {/* Packshot looping ad — 6s seamless loop · 1080×1080 */}
+      <Composition
+        id="Packshot"
+        component={Packshot}
+        durationInFrames={6 * 30}
+        fps={30}
+        width={1080}
+        height={1080}
       />
 
       {/* 6 intros artistes — une composition par membre du roster */}
