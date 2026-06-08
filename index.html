@@ -889,6 +889,114 @@
     .radio-cta:hover { transform: translateY(-2px); background: #000; }
 
     /* =====================================================
+       CULTURE — Bonbons & Rimes (editorial)
+    ===================================================== */
+    #culture {
+      background: var(--paper);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      position: relative;
+    }
+    .culture-head {
+      max-width: var(--container); margin: 0 auto 5rem;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+    .culture-head .eyebrow { color: var(--bleu); }
+    .culture-h2 {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(3rem, 8vw, 6.5rem); line-height: .9;
+      letter-spacing: -.03em; margin: 1.5rem 0;
+      text-wrap: balance;
+    }
+    .culture-h2 em { font-style: italic; color: var(--bleu); font-variation-settings: 'opsz' 144; }
+    .culture-lead {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+      line-height: 1.55; color: #3a362d;
+      max-width: 62ch; text-wrap: pretty;
+      margin-top: 1rem;
+    }
+    .culture-lead em { font-style: italic; color: var(--bleu); font-variation-settings: 'opsz' 144; }
+
+    .culture-timeline {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      display: grid; gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .culture-timeline { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .culture-timeline { grid-template-columns: repeat(3, 1fr); } }
+
+    .ref-card {
+      background: var(--paper-2);
+      padding: 2.2rem 1.9rem 2.4rem;
+      border-radius: 4px;
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(22,20,15,.07);
+      transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+      position: relative;
+    }
+    .ref-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(17,36,77,.18);
+    }
+    .ref-year {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--bleu); opacity: .82; margin-bottom: 1.1rem;
+      display: inline-flex; align-items: center; gap: .7rem;
+    }
+    .ref-year::after {
+      content: ''; flex: 1; height: 1px; background: currentColor;
+      max-width: 56px; opacity: .4;
+    }
+    .ref-title {
+      font-family: var(--serif); font-weight: 400;
+      font-size: 1.7rem; line-height: 1.05; letter-spacing: -.015em;
+      margin-bottom: .8rem; text-wrap: balance;
+      font-variation-settings: 'opsz' 144;
+    }
+    .ref-title em { font-style: italic; display: inline; }
+    .ref-artist {
+      font-family: var(--mono); font-size: .6rem; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(22,20,15,.62);
+      margin-bottom: 1.6rem;
+    }
+    .ref-body {
+      font-size: .87rem; line-height: 1.65; color: #3a362d;
+      text-wrap: pretty;
+    }
+
+    /* Card #6 — our project — gets the inverse treatment */
+    .ref-card.highlight {
+      background: var(--bleu-nuit); color: var(--paper);
+      border-color: transparent;
+      box-shadow: 0 30px 60px -25px rgba(17,36,77,.45);
+    }
+    .ref-card.highlight .ref-year { color: var(--neon); opacity: 1; }
+    .ref-card.highlight .ref-artist { color: rgba(244,239,228,.55); }
+    .ref-card.highlight .ref-body { color: rgba(244,239,228,.8); }
+    .ref-card.highlight .ref-title em { color: var(--neon); }
+
+    .culture-outro {
+      max-width: 780px; margin: 5rem auto 0;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      text-align: center;
+    }
+    .culture-outro p.quote {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+      line-height: 1.35; color: var(--ink); font-weight: 300;
+      font-variation-settings: 'opsz' 144;
+      text-wrap: balance;
+    }
+    .culture-outro .quote em { color: var(--bleu); font-style: italic; }
+    .culture-outro .sig {
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(22,20,15,.5); margin-top: 1.5rem;
+    }
+
+    /* =====================================================
        CREATION — open call
     ===================================================== */
     #creation {
@@ -949,6 +1057,334 @@
       transition: background .2s;
     }
     .cc-submit:hover { background: var(--bleu); }
+
+    /* =====================================================
+       LE LAB — Boîte à Bonbons + Pie Voleuse
+    ===================================================== */
+    .lab-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+    @media (min-width: 900px) { .lab-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .lab-card {
+      background: var(--paper);
+      border: 1px solid rgba(22,20,15,.08);
+      border-radius: 6px;
+      padding: 2.2rem 1.9rem 2rem;
+      display: flex; flex-direction: column;
+      position: relative;
+      transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+    }
+    .lab-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px -25px rgba(17,36,77,.2);
+    }
+    .lab-num {
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--bleu); opacity: .85;
+      display: inline-flex; align-items: center; gap: .6rem;
+    }
+    .lab-num::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: currentColor;
+    }
+    .lab-title {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(2rem, 3.5vw, 2.7rem); line-height: 1; letter-spacing: -.02em;
+      margin: 1rem 0 .5rem; text-wrap: balance;
+    }
+    .lab-title em { font-style: italic; color: var(--bleu); font-variation-settings: 'opsz' 144; }
+    .lab-tagline {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.05rem; line-height: 1.3; color: var(--bleu);
+      margin-bottom: 1.2rem; font-variation-settings: 'opsz' 144;
+    }
+    .lab-desc {
+      font-size: .88rem; line-height: 1.65; color: #3a362d;
+      margin-bottom: 1.5rem; text-wrap: pretty;
+    }
+    .lab-desc a { color: var(--bleu); border-bottom: 1px solid currentColor; }
+
+    .lab-form { display: flex; flex-direction: column; gap: .55rem; }
+    .lab-row { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem; }
+    @media (max-width: 480px) { .lab-row { grid-template-columns: 1fr; } }
+    .lab-input {
+      padding: .85rem 1rem;
+      background: var(--paper-2);
+      border: 1px solid rgba(22,20,15,.1);
+      border-radius: 4px;
+      font-family: var(--mono); font-size: .76rem;
+      color: var(--ink); outline: none;
+      transition: border-color .2s;
+    }
+    .lab-input:focus { border-color: var(--bleu); }
+    .lab-input::placeholder { color: rgba(22,20,15,.4); }
+
+    .lab-drop {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem;
+      background: var(--paper-2);
+      border: 1.5px dashed rgba(31,59,139,.3);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .lab-drop:hover { border-color: var(--bleu); background: rgba(196,222,240,.15); }
+    .lab-drop.has-file { border-color: var(--vert); background: rgba(46,93,59,.06); border-style: solid; }
+    .lab-drop-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--ink); color: var(--neon);
+      display: grid; place-items: center;
+      font-size: 1rem; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .lab-drop-text { display: flex; flex-direction: column; gap: .15rem; }
+    .lab-drop-label {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink); font-weight: 500;
+    }
+    .lab-drop-meta {
+      font-family: var(--mono); font-size: .58rem;
+      letter-spacing: .08em; color: rgba(22,20,15,.5);
+    }
+
+    .lab-submit {
+      display: inline-block; text-align: center;
+      padding: .95rem 1.4rem; margin-top: .35rem;
+      background: var(--ink); color: var(--paper);
+      border-radius: 999px;
+      font-family: var(--mono); font-size: .68rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      font-weight: 500; cursor: pointer; border: none;
+      transition: transform .15s, background .2s;
+    }
+    .lab-submit:hover { background: var(--bleu); }
+    .lab-submit:active { transform: scale(.97); }
+    .lab-submit:disabled { background: var(--vert); cursor: default; opacity: 1; }
+    .lab-submit-alt { background: var(--neon); color: var(--ink); }
+    .lab-submit-alt:hover { background: var(--ink); color: var(--neon); }
+
+    .lab-pack {
+      list-style: none; display: flex; flex-direction: column; gap: .55rem;
+      margin: 0 0 1.4rem 0;
+      padding: 1.1rem 1.2rem;
+      background: var(--paper-2);
+      border-radius: 4px;
+      border-left: 3px solid var(--neon);
+    }
+    .lab-pack li {
+      font-family: var(--mono); font-size: .72rem; line-height: 1.4;
+      color: var(--ink);
+    }
+
+    .lab-cta-row { display: flex; flex-direction: column; gap: .55rem; }
+    .lab-secondary-cta {
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+      text-transform: uppercase; padding: .5rem 0;
+      color: var(--bleu); transition: color .2s; text-align: center;
+    }
+    .lab-secondary-cta:hover { color: var(--ink); }
+
+    .lab-stats {
+      margin-top: auto; padding-top: 1.5rem;
+      border-top: 1px solid rgba(22,20,15,.08);
+      display: flex; align-items: center; gap: .9rem;
+    }
+    .lab-stat-n {
+      font-family: var(--serif); font-weight: 400;
+      font-size: 1.9rem; color: var(--bleu); line-height: 1;
+      font-variation-settings: 'opsz' 144;
+      font-variant-numeric: tabular-nums;
+    }
+    .lab-stat-l {
+      font-family: var(--mono); font-size: .58rem; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(22,20,15,.6);
+      line-height: 1.5;
+    }
+
+    /* =====================================================
+       LE NID — vote gallery
+    ===================================================== */
+    #nid {
+      background: var(--ink); color: var(--paper);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      position: relative; overflow: hidden;
+    }
+    #nid::before {
+      content: 'Le Nid'; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-3deg);
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: clamp(8rem, 28vw, 24rem);
+      color: rgba(243,224,0,.025);
+      letter-spacing: -.04em; line-height: 1;
+      pointer-events: none; user-select: none;
+      font-variation-settings: 'opsz' 144;
+    }
+    .nid-head {
+      max-width: var(--container); margin: 0 auto 2.5rem;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      position: relative; z-index: 1;
+    }
+    .nid-live {
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--neon);
+      display: inline-flex; align-items: center; gap: .6rem;
+      margin-bottom: 1rem;
+    }
+    .nid-live::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--neon);
+      box-shadow: 0 0 0 4px rgba(243,224,0,.22);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .nid-h2 {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(3rem, 7vw, 6rem); line-height: .92;
+      letter-spacing: -.025em; margin: .5rem 0 1rem;
+      text-wrap: balance;
+    }
+    .nid-h2 em { font-style: italic; color: var(--neon); font-variation-settings: 'opsz' 144; }
+    .nid-lead {
+      font-size: .92rem; line-height: 1.7;
+      color: rgba(244,239,228,.7); max-width: 54ch;
+      text-wrap: pretty;
+    }
+    .nid-lead strong { color: var(--neon); font-weight: 500; }
+
+    .nid-filters {
+      max-width: var(--container); margin: 0 auto 2rem;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      display: flex; gap: .55rem; flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+    .nid-filter {
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: .55rem 1.1rem;
+      border: 1px solid rgba(244,239,228,.15);
+      border-radius: 999px;
+      color: rgba(244,239,228,.7);
+      cursor: pointer; transition: all .25s var(--ease);
+      background: transparent;
+    }
+    .nid-filter.active {
+      border-color: var(--neon);
+      background: var(--neon); color: var(--ink); font-weight: 500;
+    }
+    .nid-filter:hover:not(.active) {
+      border-color: rgba(244,239,228,.4); color: var(--paper);
+    }
+
+    .nid-grid {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      display: grid; gap: 1rem;
+      grid-template-columns: 1fr;
+      position: relative; z-index: 1;
+    }
+    @media (min-width: 640px) { .nid-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .nid-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .nid-card {
+      background: rgba(244,239,228,.04);
+      border: 1px solid rgba(244,239,228,.08);
+      border-radius: 6px;
+      padding: 1.4rem 1.3rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: background .3s, border-color .3s, transform .3s var(--ease);
+    }
+    .nid-card:hover {
+      background: rgba(244,239,228,.06);
+      border-color: rgba(244,239,228,.18);
+      transform: translateY(-3px);
+    }
+    .nid-card-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .nid-play {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--neon); color: var(--ink);
+      display: grid; place-items: center;
+      font-size: .85rem; cursor: pointer;
+      transition: transform .15s, box-shadow .3s;
+      flex-shrink: 0; border: none;
+    }
+    .nid-play:hover { transform: scale(1.06); box-shadow: 0 5px 15px rgba(243,224,0,.3); }
+    .nid-play:active { transform: scale(.94); }
+    .nid-rank {
+      font-family: var(--mono); font-size: .56rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: rgba(244,239,228,.45);
+    }
+    .nid-rank.top { color: var(--neon); font-weight: 500; }
+
+    .nid-card-mid { flex: 1; }
+    .nid-track {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.15rem; line-height: 1.2; letter-spacing: -.01em;
+      margin-bottom: .35rem; text-wrap: balance;
+      font-variation-settings: 'opsz' 144;
+    }
+    .nid-artist {
+      font-family: var(--mono); font-size: .6rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(244,239,228,.6);
+      display: flex; gap: .5rem; align-items: center; flex-wrap: wrap;
+    }
+    .nid-source {
+      padding: .18rem .55rem;
+      background: rgba(243,224,0,.12);
+      color: var(--neon);
+      border-radius: 999px;
+      font-size: .52rem; letter-spacing: .14em;
+    }
+    .nid-source.concours { background: rgba(201,56,56,.18); color: #f08585; }
+
+    .nid-votes {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: .35rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(244,239,228,.08);
+    }
+    .nid-vote {
+      display: flex; flex-direction: column; align-items: center; gap: .2rem;
+      padding: .55rem .25rem;
+      background: rgba(244,239,228,.03);
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer; color: inherit;
+      transition: all .25s var(--ease);
+    }
+    .nid-vote:hover {
+      background: rgba(244,239,228,.08); transform: translateY(-2px);
+    }
+    .nid-vote:active { transform: scale(.96); }
+    .nid-vote.voted {
+      background: rgba(243,224,0,.14);
+      border-color: rgba(243,224,0,.35);
+    }
+    .nid-vote-emoji {
+      font-size: 1.15rem; line-height: 1;
+      transition: transform .25s var(--ease);
+    }
+    .nid-vote:hover .nid-vote-emoji { transform: scale(1.18) rotate(-6deg); }
+    .nid-vote-count {
+      font-family: var(--mono); font-size: .65rem; font-weight: 500;
+      color: var(--paper); font-variant-numeric: tabular-nums;
+    }
+    .nid-vote-label {
+      font-family: var(--mono); font-size: .42rem;
+      letter-spacing: .13em; text-transform: uppercase;
+      color: rgba(244,239,228,.5);
+    }
+
+    .nid-meta {
+      font-family: var(--mono); font-size: .54rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(244,239,228,.4);
+      display: flex; justify-content: space-between;
+    }
 
     /* =====================================================
        CREW — tiers
@@ -1579,7 +2015,9 @@
       <li><a href="#story">Histoire</a></li>
       <li><a href="#son">Le son</a></li>
       <li><a href="#label">Le label</a></li>
-      <li><a href="#creation">Création</a></li>
+      <li><a href="#culture">Culture</a></li>
+      <li><a href="#creation">Le lab</a></li>
+      <li><a href="#nid">Le Nid</a></li>
       <li><a href="#shop">Shop</a></li>
     </ul>
   </nav>
@@ -1889,49 +2327,150 @@
   </div>
 </section>
 
-<!-- ========== CREATION ========== -->
+<!-- ========== CULTURE — Bonbons & Rimes ========== -->
+<section id="culture">
+  <div class="culture-head">
+    <span class="eyebrow r">Étude · Culture rap × confiserie</span>
+    <h2 class="culture-h2 r d1">Des bonbons<br><em>et des rimes.</em></h2>
+    <p class="culture-lead r d2">Le rap a toujours mangé du sucre. Du <em>Lollipop</em> de Lil Wayne au <em>Candy Shop</em> de 50 Cent, du Travis Scott Meal aux centaines de collabs food × musique qui ont suivi, le hip-hop a fait du bonbon un vocabulaire — celui du désir, de l'enfance, de la facilité gourmande. La Pie Qui Rap s'inscrit dans cette histoire. On l'écrit avec une marque française qui pèse cent ans.</p>
+  </div>
+
+  <div class="culture-timeline">
+    <article class="ref-card r">
+      <span class="ref-year">1979 · Genèse</span>
+      <h3 class="ref-title">Rapper's <em>Delight</em></h3>
+      <p class="ref-artist">Sugarhill Gang · Sugarhill Records</p>
+      <p class="ref-body">Le premier hit rap commercial sort sur un label qui s'appelle « Sugar Hill ». Le sucre est dans l'ADN du genre, dès le premier disque qui passe en radio.</p>
+    </article>
+
+    <article class="ref-card r d1">
+      <span class="ref-year">2005 · Métaphore</span>
+      <h3 class="ref-title">Candy <em>Shop</em></h3>
+      <p class="ref-artist">50 Cent · The Massacre</p>
+      <p class="ref-body">Neuf semaines #1 au Billboard. Le bonbon devient métaphore explicite du désir. Le rap parle ses émotions avec le vocabulaire des confiseurs.</p>
+    </article>
+
+    <article class="ref-card r d2">
+      <span class="ref-year">2008 · Apogée pop</span>
+      <h3 class="ref-title">Lolli <em>pop</em></h3>
+      <p class="ref-artist">Lil Wayne · Tha Carter III</p>
+      <p class="ref-body">Cinq fois disque de platine. La sucette s'impose comme objet pop, et avec elle l'idée que le rap peut posséder ses propres rituels gourmands.</p>
+    </article>
+
+    <article class="ref-card r">
+      <span class="ref-year">2020 · Standard</span>
+      <h3 class="ref-title">The Travis Scott <em>Meal</em></h3>
+      <p class="ref-artist">Travis Scott × McDonald's</p>
+      <p class="ref-body">Plusieurs centaines de millions de dollars de retombées en un mois. L'artiste devient marque, la marque devient artiste — la collab food × musique devient un format reconnu.</p>
+    </article>
+
+    <article class="ref-card r d1">
+      <span class="ref-year">2024 · France</span>
+      <h3 class="ref-title">L'éveil <em>français.</em></h3>
+      <p class="ref-artist">Damso · Aya Nakamura · Tiakola · PNL</p>
+      <p class="ref-body">Le rap français mûrit ses propres références gourmandes. La sucrerie cesse d'être métaphore d'enfance pour devenir territoire culturel partagé. Le public attend ce mariage-là — chez nous, en VF, sans complexe.</p>
+    </article>
+
+    <article class="ref-card highlight r d2">
+      <span class="ref-year">2026 · Notre tour</span>
+      <h3 class="ref-title">La Pie <em>Qui Rap</em></h3>
+      <p class="ref-artist">La Pie Qui Chante × La Pie Records</p>
+      <p class="ref-body">Pas une collab d'opportunité. Une marque centenaire qui adopte les codes du rap, et un label musical qui adopte un siècle de menthe. La suite logique d'une conversation commencée dans le New Jersey en 1979.</p>
+    </article>
+  </div>
+
+  <div class="culture-outro r">
+    <p class="quote">« Le sucre n'a jamais quitté le rap. Ce qu'on fait n'est ni un coup ni une caution&nbsp;— <em>c'est la suite.</em> »</p>
+    <p class="sig">— note d'intention · mars 2026</p>
+  </div>
+</section>
+
+<!-- ========== CREATION → LE LAB ========== -->
 <section id="creation">
   <div class="creation-head">
     <div>
-      <span class="eyebrow r">Appel à projets · Trimestriel</span>
-      <h2 class="creation-h2 r d1">Création<br><em>Ouverte.</em></h2>
+      <span class="eyebrow r">Le Lab · Trois portes ouvertes</span>
+      <h2 class="creation-h2 r d1">Le <em>Lab.</em></h2>
     </div>
-    <p class="creation-lead r d2">Chaque trimestre, La Pie Qui Rap sélectionne trois créateurs — un visuel, un son, un texte — dont le travail sera imprimé sur un sachet édition limitée vendu en GMS.</p>
+    <p class="creation-lead r d2"><strong>La Boîte</strong> reçoit ta maquette en direct. <strong>La Pie Voleuse</strong> te file nos sons à remixer. <strong>Le Nid</strong> en bas écoute, vote et fait monter les meilleurs vers la radio. Trois manières d'entrer.</p>
   </div>
 
-  <div class="creation-grid">
-    <div class="cc r">
-      <span class="cc-num">N°01 / Visuel</span>
-      <h3 class="cc-title"><em>Visuel.</em></h3>
-      <p class="cc-desc">Illustration, photographie, motion design ou typographie. Format final : packaging sachet 150g, CMJN, 300 dpi.</p>
-      <form class="cc-form" onsubmit="handleCreation(event,this)">
-        <input class="cc-input" type="email" placeholder="votre@email.fr" required aria-label="Email">
-        <input class="cc-input" type="url" placeholder="Lien portfolio ou Behance" required aria-label="Portfolio">
-        <button class="cc-submit" type="submit">Soumettre →</button>
+  <div class="lab-grid">
+    <article class="lab-card r d1">
+      <span class="lab-num">N°01 · Audio direct</span>
+      <h3 class="lab-title">La Boîte à <em>Bonbons.</em></h3>
+      <p class="lab-tagline">Dépose ta maquette. Direct.</p>
+      <p class="lab-desc">Plus de WeTransfer qui périme. Tu uploades ton MP3, on le reçoit, on l'écoute. Si on accroche, il monte au <a href="#nid">Nid</a>.</p>
+      <form class="lab-form" onsubmit="handleLabUpload(event, this, 'boite')">
+        <div class="lab-row">
+          <input class="lab-input" name="artist" type="text" placeholder="Nom d'artiste / blaze" required aria-label="Nom d'artiste">
+          <input class="lab-input" name="title" type="text" placeholder="Titre du morceau" required aria-label="Titre">
+        </div>
+        <div class="lab-row">
+          <input class="lab-input" name="city" type="text" placeholder="Ville" required aria-label="Ville">
+          <input class="lab-input" name="email" type="email" placeholder="email (privé)" required aria-label="Email">
+        </div>
+        <label class="lab-drop">
+          <input type="file" name="audio" accept="audio/*,.mp3,.wav" required hidden onchange="handleLabFileSelect(event, this)">
+          <span class="lab-drop-icon">↑</span>
+          <span class="lab-drop-text">
+            <strong class="lab-drop-label">Glisse ton fichier audio</strong>
+            <span class="lab-drop-meta">MP3 / WAV · 25 MB max</span>
+          </span>
+        </label>
+        <button class="lab-submit" type="submit">Envoyer ma maquette →</button>
       </form>
-    </div>
+      <div class="lab-stats">
+        <span class="lab-stat-n" data-count="47">0</span>
+        <span class="lab-stat-l">maquettes reçues<br>cette semaine</span>
+      </div>
+    </article>
 
-    <div class="cc r d1">
-      <span class="cc-num">N°02 / Son</span>
-      <h3 class="cc-title"><em>Son.</em></h3>
-      <p class="cc-desc">Morceau original, beat, sample ou composition acoustique. Durée 2 à 4 minutes. Formats : WAV, FLAC, MP3 320 kbps.</p>
-      <form class="cc-form" onsubmit="handleCreation(event,this)">
-        <input class="cc-input" type="email" placeholder="votre@email.fr" required aria-label="Email">
-        <input class="cc-input" type="url" placeholder="Lien SoundCloud ou WeTransfer" required aria-label="Lien">
-        <button class="cc-submit" type="submit">Soumettre →</button>
-      </form>
-    </div>
+    <article class="lab-card r d2">
+      <span class="lab-num">N°02 · Sample contest</span>
+      <h3 class="lab-title">La Pie <em>Voleuse.</em></h3>
+      <p class="lab-tagline">Vole nos sons. Fais-en un beat.</p>
+      <p class="lab-desc">On a enregistré tout ce qui peut faire du bruit dans un sachet de Menthe Claire. Froissement, croque, cliquetis, déchirure. Tu télécharges le pack, tu en fais une prod, tu reviens la déposer.</p>
 
-    <div class="cc r d2">
-      <span class="cc-num">N°03 / Texte</span>
-      <h3 class="cc-title"><em>Texte.</em></h3>
-      <p class="cc-desc">Slam, paroles, microfiction ou poésie en rapport avec la marque ou la menthe. 1 500 signes maximum, langue française.</p>
-      <form class="cc-form" onsubmit="handleCreation(event,this)">
-        <input class="cc-input" type="email" placeholder="votre@email.fr" required aria-label="Email">
-        <textarea class="cc-input" rows="3" placeholder="Collez votre texte (1500 signes max)" maxlength="1500" required aria-label="Texte"></textarea>
-        <button class="cc-submit" type="submit">Soumettre →</button>
-      </form>
-    </div>
+      <ul class="lab-pack">
+        <li>↳ 12 samples one-shot (.wav 24bit / 96 kHz)</li>
+        <li>↳ 4 loops drum prêts à mixer (90–120 bpm)</li>
+        <li>↳ Stems isolés du single « Ils menthe »</li>
+        <li>↳ Licence libre — usage personnel &amp; commercial</li>
+      </ul>
+
+      <div class="lab-cta-row">
+        <a href="#" class="lab-submit lab-submit-alt" onclick="handleSamplePackDownload(event, this)">
+          ↓ Télécharger le pack (84 MB)
+        </a>
+        <a href="#nid" class="lab-secondary-cta">Voir les beats reçus dans le Nid ↓</a>
+      </div>
+
+      <div class="lab-stats">
+        <span class="lab-stat-n" data-count="128">0</span>
+        <span class="lab-stat-l">téléchargements<br>· 19 beats reçus</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========== LE NID — vote gallery ========== -->
+<section id="nid">
+  <div class="nid-head">
+    <span class="nid-live r">47 maquettes · 19 beats · top semaine 06.2026</span>
+    <h2 class="nid-h2 r d1">Le <em>Nid.</em></h2>
+    <p class="nid-lead r d2">Les talents qu'on couve. Écoute, vote, fais monter ceux qui méritent. <strong>Chaque dimanche, le top 3 passe en avant-première sur La Pie Sessions.</strong></p>
+  </div>
+
+  <div class="nid-filters r d2">
+    <button class="nid-filter active" data-filter="all" type="button">Tous</button>
+    <button class="nid-filter" data-filter="boite" type="button">La Boîte</button>
+    <button class="nid-filter" data-filter="concours" type="button">Pie Voleuse</button>
+    <button class="nid-filter" data-filter="top" type="button">Top semaine</button>
+  </div>
+
+  <div class="nid-grid r d3" id="nid-grid">
+    <!-- Cards rendered by JS -->
   </div>
 </section>
 
@@ -2176,7 +2715,9 @@
           <li><a href="#story">L'histoire</a></li>
           <li><a href="#son">Le son</a></li>
           <li><a href="#label">La Pie Records</a></li>
-          <li><a href="#creation">Création Ouverte</a></li>
+          <li><a href="#culture">Bonbons &amp; Rimes</a></li>
+          <li><a href="#creation">Le Lab</a></li>
+          <li><a href="#nid">Le Nid</a></li>
           <li><a href="#crew">Crew Program</a></li>
         </ul>
       </div>
@@ -2214,7 +2755,7 @@
 const bar = document.getElementById('topbar');
 const burger = document.getElementById('burger');
 const navlinks = document.getElementById('navlinks');
-const sections = ['story', 'creation', 'shop', 'retail'];
+const sections = ['story', 'culture', 'creation', 'shop', 'retail'];
 function updateNav() {
   bar.classList.toggle('scrolled', scrollY > 30);
   /* Light bg sections need inverse nav */
@@ -2285,6 +2826,152 @@ function handleSignup(e) {
   btn.textContent = '✓ Bienvenue';
   e.target.querySelector('input').disabled = true;
   btn.disabled = true;
+}
+
+/* =====================================================
+   LE NID — seeded submissions, voting, filters
+===================================================== */
+const nidSubmissions = [
+  { id: 'k2', source: 'concours', rank: 1, artist: 'Kayïs',       track: 'Bonbon Marseille',   city: 'Marseille',     date: 'il y a 4j', votes: { michoko: 89, carambar: 14, menthe: 41, fraise: 22 } },
+  { id: 'lb', source: 'boite',    rank: 2, artist: 'Lyc Boréal',   track: 'Le drop du frigo',   city: 'Saint-Étienne', date: 'il y a 2j', votes: { michoko: 47, carambar: 32, menthe: 28, fraise: 12 } },
+  { id: 'lr', source: 'boite',    rank: 3, artist: 'Lulu RDS',     track: 'Recette 1921',       city: 'Lille',         date: 'il y a 3j', votes: { michoko: 64, carambar: 22, menthe: 14, fraise: 8  } },
+  { id: 'sn', source: 'concours', rank: 4, artist: 'Snèze',        track: 'Tour du papier',     city: 'Lyon',          date: 'il y a 6j', votes: { michoko: 31, carambar: 18, menthe: 19, fraise: 27 } },
+  { id: 'pb', source: 'boite',    rank: 5, artist: 'Plata Beats',  track: 'Glaçon flip',        city: 'Paris 18e',     date: 'il y a 1j', votes: { michoko: 23, carambar:  8, menthe: 51, fraise: 5  } },
+  { id: 'm7', source: 'concours', rank: 6, artist: 'Mémoire 7',    track: 'Croqué',             city: 'Bordeaux',      date: 'il y a 5j', votes: { michoko: 18, carambar: 41, menthe:  9, fraise: 11 } },
+];
+
+const voteEmojis = {
+  michoko: { e: '🍬', l: 'Lourd' },
+  carambar:{ e: '🍫', l: 'Fun'   },
+  menthe:  { e: '🌿', l: 'Frais' },
+  fraise:  { e: '🍓', l: 'Doux'  }
+};
+
+function renderNid(filter) {
+  const grid = document.getElementById('nid-grid');
+  if (!grid) return;
+  let items = nidSubmissions;
+  if (filter === 'boite')    items = nidSubmissions.filter(s => s.source === 'boite');
+  else if (filter === 'concours') items = nidSubmissions.filter(s => s.source === 'concours');
+  else if (filter === 'top') items = nidSubmissions.slice(0, 3);
+
+  grid.innerHTML = items.map(s => {
+    const myVotes = JSON.parse(localStorage.getItem(`nid:${s.id}`) || '{}');
+    const totalVotes = Object.values(s.votes).reduce((a,b)=>a+b,0) + Object.values(myVotes).reduce((a,b)=>a+b,0);
+    return `
+      <article class="nid-card" data-id="${s.id}">
+        <div class="nid-card-top">
+          <button class="nid-play" type="button" aria-label="Lecture de ${s.track}">▶</button>
+          <span class="nid-rank ${s.rank <= 3 ? 'top' : ''}">#${s.rank} · semaine</span>
+        </div>
+        <div class="nid-card-mid">
+          <div class="nid-track">${s.track}</div>
+          <div class="nid-artist">
+            <span>${s.artist}</span>
+            <span class="nid-source ${s.source}">${s.source === 'boite' ? 'Boîte' : 'Voleuse'}</span>
+          </div>
+        </div>
+        <div class="nid-votes">
+          ${Object.entries(voteEmojis).map(([k, v]) => `
+            <button type="button" class="nid-vote ${myVotes[k] ? 'voted' : ''}" data-emoji="${k}" data-id="${s.id}" aria-label="${v.l}">
+              <span class="nid-vote-emoji">${v.e}</span>
+              <span class="nid-vote-count">${s.votes[k] + (myVotes[k] || 0)}</span>
+              <span class="nid-vote-label">${v.l}</span>
+            </button>
+          `).join('')}
+        </div>
+        <div class="nid-meta">
+          <span>${s.city}</span>
+          <span>${totalVotes} votes · ${s.date}</span>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  /* Wire vote buttons (toggleable, localStorage-backed) */
+  grid.querySelectorAll('.nid-vote').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const emoji = btn.dataset.emoji;
+      const key = `nid:${id}`;
+      const myVotes = JSON.parse(localStorage.getItem(key) || '{}');
+      if (myVotes[emoji]) {
+        delete myVotes[emoji];
+        btn.classList.remove('voted');
+      } else {
+        myVotes[emoji] = 1;
+        btn.classList.add('voted');
+      }
+      localStorage.setItem(key, JSON.stringify(myVotes));
+      const base = nidSubmissions.find(s => s.id === id).votes[emoji];
+      btn.querySelector('.nid-vote-count').textContent = base + (myVotes[emoji] || 0);
+      /* Update total in meta */
+      const card = btn.closest('.nid-card');
+      const allMy = JSON.parse(localStorage.getItem(key) || '{}');
+      const sub = nidSubmissions.find(s => s.id === id);
+      const total = Object.values(sub.votes).reduce((a,b)=>a+b,0) + Object.values(allMy).reduce((a,b)=>a+b,0);
+      const metaSpan = card.querySelector('.nid-meta span:last-child');
+      metaSpan.textContent = `${total} votes · ${sub.date}`;
+    });
+  });
+
+  /* Wire play buttons (demo only — no real audio yet) */
+  grid.querySelectorAll('.nid-play').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const wasPlaying = btn.textContent === '⏸';
+      grid.querySelectorAll('.nid-play').forEach(b => b.textContent = '▶');
+      btn.textContent = wasPlaying ? '▶' : '⏸';
+    });
+  });
+}
+
+document.querySelectorAll('.nid-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nid-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderNid(btn.dataset.filter);
+  });
+});
+
+renderNid('all');
+
+/* =====================================================
+   LE LAB — Boîte à Bonbons upload + Concours
+===================================================== */
+function handleLabUpload(e, form, type) {
+  e.preventDefault();
+  const btn = form.querySelector('.lab-submit');
+  const fields = form.querySelectorAll('input, textarea');
+  const dropLabel = form.querySelector('.lab-drop-label');
+  btn.textContent = 'Envoi en cours…';
+  btn.disabled = true;
+  fields.forEach(f => f.disabled = true);
+  setTimeout(() => {
+    btn.textContent = '✓ Reçu — on t\'écoute';
+    if (dropLabel) dropLabel.textContent = '✓ Maquette envoyée';
+  }, 1100);
+}
+
+function handleLabFileSelect(e, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const drop = input.closest('.lab-drop');
+  const label = drop.querySelector('.lab-drop-label');
+  const meta = drop.querySelector('.lab-drop-meta');
+  const size = (file.size / 1024 / 1024).toFixed(1);
+  label.textContent = file.name.length > 28 ? file.name.slice(0, 25) + '…' : file.name;
+  if (meta) meta.textContent = `${size} MB · prêt à envoyer`;
+  drop.classList.add('has-file');
+}
+
+function handleSamplePackDownload(e, btn) {
+  e.preventDefault();
+  const original = btn.innerHTML;
+  btn.innerHTML = '⏳ Pack en préparation · Q3 2026';
+  btn.style.pointerEvents = 'none';
+  setTimeout(() => {
+    btn.innerHTML = '✓ Inscrit à la liste d\'attente';
+  }, 800);
 }
 
 /* Cursor-follow spotlight on tier cards */
