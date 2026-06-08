@@ -2829,9 +2829,11 @@ function handleSignup(e) {
 }
 
 /* =====================================================
-   LE NID — seeded submissions, voting, filters
+   LE NID — seeded data + live votes via /api/vote
+   Progressive enhancement: works offline (localStorage),
+   syncs to KV when the API is available.
 ===================================================== */
-const nidSubmissions = [
+const MOCK_SUBMISSIONS = [
   { id: 'k2', source: 'concours', rank: 1, artist: 'Kayïs',       track: 'Bonbon Marseille',   city: 'Marseille',     date: 'il y a 4j', votes: { michoko: 89, carambar: 14, menthe: 41, fraise: 22 } },
   { id: 'lb', source: 'boite',    rank: 2, artist: 'Lyc Boréal',   track: 'Le drop du frigo',   city: 'Saint-Étienne', date: 'il y a 2j', votes: { michoko: 47, carambar: 32, menthe: 28, fraise: 12 } },
   { id: 'lr', source: 'boite',    rank: 3, artist: 'Lulu RDS',     track: 'Recette 1921',       city: 'Lille',         date: 'il y a 3j', votes: { michoko: 64, carambar: 22, menthe: 14, fraise: 8  } },
@@ -2847,17 +2849,44 @@ const voteEmojis = {
   fraise:  { e: '🍓', l: 'Doux'  }
 };
 
+let activeSubmissions = [...MOCK_SUBMISSIONS];
+let currentFilter = 'all';
+let usingRemoteData = false;
+
+async function loadSubmissionsFromAPI() {
+  try {
+    const r = await fetch('/api/submissions', { cache: 'no-store' });
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (data.source === 'kv' && Array.isArray(data.submissions) && data.submissions.length > 0) {
+      return data.submissions;
+    }
+  } catch (e) {
+    console.info('[Nid] API offline, using mock data:', e.message);
+  }
+  return null;
+}
+
+function recomputeRanks(list) {
+  return [...list]
+    .map(s => ({ ...s, _total: Object.values(s.votes || {}).reduce((a,b) => a + Number(b||0), 0) }))
+    .sort((a, b) => b._total - a._total)
+    .map((s, i) => ({ ...s, rank: i + 1 }))
+    .map(({ _total, ...rest }) => rest);
+}
+
 function renderNid(filter) {
+  currentFilter = filter || currentFilter;
   const grid = document.getElementById('nid-grid');
   if (!grid) return;
-  let items = nidSubmissions;
-  if (filter === 'boite')    items = nidSubmissions.filter(s => s.source === 'boite');
-  else if (filter === 'concours') items = nidSubmissions.filter(s => s.source === 'concours');
-  else if (filter === 'top') items = nidSubmissions.slice(0, 3);
+  let items = activeSubmissions;
+  if (currentFilter === 'boite')    items = activeSubmissions.filter(s => s.source === 'boite');
+  else if (currentFilter === 'concours') items = activeSubmissions.filter(s => s.source === 'concours');
+  else if (currentFilter === 'top') items = activeSubmissions.slice(0, 3);
 
   grid.innerHTML = items.map(s => {
     const myVotes = JSON.parse(localStorage.getItem(`nid:${s.id}`) || '{}');
-    const totalVotes = Object.values(s.votes).reduce((a,b)=>a+b,0) + Object.values(myVotes).reduce((a,b)=>a+b,0);
+    const total = Object.values(s.votes).reduce((a,b)=>a+Number(b||0),0);
     return `
       <article class="nid-card" data-id="${s.id}">
         <div class="nid-card-top">
@@ -2875,55 +2904,85 @@ function renderNid(filter) {
           ${Object.entries(voteEmojis).map(([k, v]) => `
             <button type="button" class="nid-vote ${myVotes[k] ? 'voted' : ''}" data-emoji="${k}" data-id="${s.id}" aria-label="${v.l}">
               <span class="nid-vote-emoji">${v.e}</span>
-              <span class="nid-vote-count">${s.votes[k] + (myVotes[k] || 0)}</span>
+              <span class="nid-vote-count">${s.votes[k] || 0}</span>
               <span class="nid-vote-label">${v.l}</span>
             </button>
           `).join('')}
         </div>
         <div class="nid-meta">
           <span>${s.city}</span>
-          <span>${totalVotes} votes · ${s.date}</span>
+          <span>${total} votes · ${s.date}</span>
         </div>
       </article>
     `;
   }).join('');
-
-  /* Wire vote buttons (toggleable, localStorage-backed) */
-  grid.querySelectorAll('.nid-vote').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const emoji = btn.dataset.emoji;
-      const key = `nid:${id}`;
-      const myVotes = JSON.parse(localStorage.getItem(key) || '{}');
-      if (myVotes[emoji]) {
-        delete myVotes[emoji];
-        btn.classList.remove('voted');
-      } else {
-        myVotes[emoji] = 1;
-        btn.classList.add('voted');
-      }
-      localStorage.setItem(key, JSON.stringify(myVotes));
-      const base = nidSubmissions.find(s => s.id === id).votes[emoji];
-      btn.querySelector('.nid-vote-count').textContent = base + (myVotes[emoji] || 0);
-      /* Update total in meta */
-      const card = btn.closest('.nid-card');
-      const allMy = JSON.parse(localStorage.getItem(key) || '{}');
-      const sub = nidSubmissions.find(s => s.id === id);
-      const total = Object.values(sub.votes).reduce((a,b)=>a+b,0) + Object.values(allMy).reduce((a,b)=>a+b,0);
-      const metaSpan = card.querySelector('.nid-meta span:last-child');
-      metaSpan.textContent = `${total} votes · ${sub.date}`;
-    });
-  });
-
-  /* Wire play buttons (demo only — no real audio yet) */
-  grid.querySelectorAll('.nid-play').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const wasPlaying = btn.textContent === '⏸';
-      grid.querySelectorAll('.nid-play').forEach(b => b.textContent = '▶');
-      btn.textContent = wasPlaying ? '▶' : '⏸';
-    });
-  });
 }
+
+function updateCardCounts(submission) {
+  const card = document.querySelector(`.nid-card[data-id="${submission.id}"]`);
+  if (!card) return;
+  card.querySelectorAll('.nid-vote').forEach(btn => {
+    const e = btn.dataset.emoji;
+    btn.querySelector('.nid-vote-count').textContent = submission.votes[e] || 0;
+  });
+  const total = Object.values(submission.votes).reduce((a,b)=>a+Number(b||0),0);
+  const metaLast = card.querySelector('.nid-meta span:last-child');
+  if (metaLast) metaLast.textContent = `${total} votes · ${submission.date}`;
+}
+
+/* Event delegation on the grid: vote + play */
+document.getElementById('nid-grid').addEventListener('click', async (ev) => {
+  const voteBtn = ev.target.closest('.nid-vote');
+  const playBtn = ev.target.closest('.nid-play');
+
+  if (playBtn) {
+    const wasPlaying = playBtn.textContent === '⏸';
+    document.querySelectorAll('.nid-play').forEach(b => b.textContent = '▶');
+    playBtn.textContent = wasPlaying ? '▶' : '⏸';
+    return;
+  }
+  if (!voteBtn) return;
+
+  const id = voteBtn.dataset.id;
+  const emoji = voteBtn.dataset.emoji;
+  const key = `nid:${id}`;
+  const myVotes = JSON.parse(localStorage.getItem(key) || '{}');
+  const wasVoted = !!myVotes[emoji];
+  const action = wasVoted ? 'remove' : 'add';
+
+  /* Optimistic update */
+  const sub = activeSubmissions.find(s => s.id === id);
+  if (!sub) return;
+  if (wasVoted) {
+    delete myVotes[emoji];
+    voteBtn.classList.remove('voted');
+    sub.votes[emoji] = Math.max(0, (Number(sub.votes[emoji]) || 0) - 1);
+  } else {
+    myVotes[emoji] = 1;
+    voteBtn.classList.add('voted');
+    sub.votes[emoji] = (Number(sub.votes[emoji]) || 0) + 1;
+  }
+  localStorage.setItem(key, JSON.stringify(myVotes));
+  updateCardCounts(sub);
+
+  /* Sync to server (best-effort) */
+  try {
+    const r = await fetch('/api/vote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ submissionId: id, emoji, action }),
+    });
+    if (r.ok) {
+      const data = await r.json();
+      if (data.votes) {
+        sub.votes = data.votes; // server is authoritative
+        updateCardCounts(sub);
+      }
+    }
+  } catch (e) {
+    /* offline mode: keep optimistic state */
+  }
+});
 
 document.querySelectorAll('.nid-filter').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -2933,7 +2992,16 @@ document.querySelectorAll('.nid-filter').forEach(btn => {
   });
 });
 
+/* Initial render with mock, then upgrade to API data when ready */
 renderNid('all');
+loadSubmissionsFromAPI().then(remote => {
+  if (remote) {
+    activeSubmissions = recomputeRanks(remote);
+    usingRemoteData = true;
+    renderNid(currentFilter);
+    console.info('[Nid] Live data loaded from KV:', remote.length, 'submissions');
+  }
+});
 
 /* =====================================================
    LE LAB — Boîte à Bonbons upload + Concours
