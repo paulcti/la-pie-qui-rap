@@ -153,21 +153,22 @@ export const Packshot: React.FC = () => {
         </div>
       </div>
 
-      {/* CENTER — sachet with 3D tilt + light sweep */}
+      {/* CENTER — sachet with 3D tilt + light sweep
+          Positioned in the upper half so the bottom text zone stays clear */}
       <AbsoluteFill
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
           perspective: 1800,
-          padding: '160px 0 240px',
+          padding: '120px 0 0',
         }}
       >
         <div
           style={{
             position: 'relative',
-            width: 560,
-            height: 720,
+            width: 500,
+            height: 640,
             transformStyle: 'preserve-3d',
             transform: `rotateY(${tiltY}deg) rotateZ(${tiltZ}deg) translateY(${floatY}px) scale(${scaleSwell})`,
             filter: `drop-shadow(0 ${30 + Math.abs(floatY)}px ${50 + Math.abs(floatY) * 2}px rgba(0,0,0,.55)) drop-shadow(0 10px 20px rgba(0,0,0,.3))`,
@@ -194,6 +195,20 @@ export const Packshot: React.FC = () => {
           />
         </div>
       </AbsoluteFill>
+
+      {/* BOTTOM gradient backdrop — guarantees text legibility even if
+          the sachet shadow drifts down into the title zone */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 380,
+          background: `linear-gradient(180deg, transparent 0%, rgba(7,17,46,.6) 35%, rgba(7,17,46,.95) 70%, #07112e 100%)`,
+          pointerEvents: 'none',
+        }}
+      />
 
       {/* CORNER STICKER — rotating circular stamp top-right */}
       <div
@@ -241,14 +256,14 @@ export const Packshot: React.FC = () => {
         </svg>
       </div>
 
-      {/* BOTTOM — title + CTA */}
+      {/* BOTTOM — title + CTA (on top of gradient backdrop) */}
       <div
         style={{
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
-          padding: '0 60px 56px',
+          padding: '0 60px 60px',
           textAlign: 'center',
         }}
       >
@@ -257,12 +272,13 @@ export const Packshot: React.FC = () => {
             fontFamily: FRAUNCES,
             fontVariationSettings: '"opsz" 144',
             fontWeight: 300,
-            fontSize: 96,
+            fontSize: 80,
             color: PAPER,
             lineHeight: 0.95,
             letterSpacing: '-0.025em',
             transform: `scale(${titleScale})`,
-            marginBottom: 8,
+            marginBottom: 10,
+            textShadow: '0 4px 20px rgba(0,0,0,.4)',
           }}
         >
           Menthe Claire <em style={{ color: NEON }}>×</em> rap.
@@ -272,10 +288,11 @@ export const Packshot: React.FC = () => {
             fontFamily: FRAUNCES,
             fontVariationSettings: '"opsz" 144',
             fontStyle: 'italic',
-            fontSize: 44,
+            fontSize: 38,
             color: GLACE,
-            opacity: 0.85,
-            marginBottom: 32,
+            opacity: 0.92,
+            marginBottom: 28,
+            textShadow: '0 2px 10px rgba(0,0,0,.3)',
           }}
         >
           « Le bonbon du son. »
@@ -287,16 +304,16 @@ export const Packshot: React.FC = () => {
             display: 'inline-flex',
             alignItems: 'center',
             gap: 16,
-            padding: '16px 32px',
+            padding: '16px 30px',
             background: NEON,
             color: INK,
             borderRadius: 999,
             fontFamily: MONO,
-            fontSize: 24,
+            fontSize: 22,
             letterSpacing: '0.16em',
             fontWeight: 600,
             opacity: ctaPulse,
-            boxShadow: '0 12px 30px rgba(243,224,0,.25)',
+            boxShadow: '0 12px 30px rgba(243,224,0,.3)',
           }}
         >
           LAPIEQUIRAP.VERCEL.APP
@@ -304,12 +321,12 @@ export const Packshot: React.FC = () => {
             style={{
               display: 'inline-grid',
               placeItems: 'center',
-              width: 32,
-              height: 32,
+              width: 30,
+              height: 30,
               borderRadius: '50%',
               background: INK,
               color: NEON,
-              fontSize: 16,
+              fontSize: 15,
             }}
           >
             →
