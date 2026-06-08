@@ -1,0 +1,2502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Pie Qui Rap — Menthe Glacée, Édition Printemps 2026</title>
+  <meta name="description" content="La Pie Qui Chante avait 70 ans. On lui a mis un micro. Sachet collector menthe glacée — Édition Printemps 2026.">
+  <meta property="og:title" content="La Pie Qui Rap">
+  <meta property="og:description" content="La Pie Qui Chante avait 70 ans. On lui a mis un micro.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="canonical" href="https://lapiequirap.fr/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "La Pie Qui Rap — Sachet Menthe Glacée Édition Limitée",
+    "brand": { "@type": "Brand", "name": "La Pie Qui Chante" },
+    "description": "Sachet 150g bonbons menthe glacée, packaging collector Printemps 2026.",
+    "offers": { "@type": "Offer", "price": "1.90", "priceCurrency": "EUR" }
+  }
+  </script>
+
+  <style>
+    /* =====================================================
+       Tokens — palette éditoriale
+    ===================================================== */
+    :root {
+      --ink:       #16140f;
+      --paper:     #f4efe4;
+      --paper-2:   #ebe5d6;
+      --bleu-nuit: #11244d;
+      --bleu:      #1f3b8b;
+      --glace:     #c4def0;
+      --or:        #e7c862;
+      --neon:      #f3e000;
+      --rouge:     #c93838;
+      --vert:      #2e5d3b;
+
+      --serif:   'Fraunces', 'Times New Roman', serif;
+      --sans:    'Inter Tight', system-ui, sans-serif;
+      --mono:    'JetBrains Mono', monospace;
+
+      --ease:        cubic-bezier(0.23, 1, 0.32, 1);    /* Emil's strong ease-out */
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);    /* iOS drawer curve */
+      --container: 1280px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px; line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    ::selection { background: var(--neon); color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+
+    /* Grain overlay (subtle paper texture) */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 1000;
+      pointer-events: none; opacity: .07; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* =====================================================
+       Layout helpers
+    ===================================================== */
+    .wrap { max-width: var(--container); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: .68rem; letter-spacing: .2em;
+      text-transform: uppercase; opacity: .55;
+      display: inline-flex; align-items: center; gap: .8rem;
+    }
+    .eyebrow::before {
+      content: ''; width: 28px; height: 1px; background: currentColor; opacity: .5;
+    }
+
+    .display {
+      font-family: var(--serif);
+      font-weight: 300; line-height: .92; letter-spacing: -.025em;
+      font-size: clamp(3.5rem, 11vw, 11rem);
+    }
+    .display em {
+      font-style: italic; font-weight: 400;
+      font-variation-settings: 'opsz' 144;
+    }
+    .display .stroke {
+      -webkit-text-stroke: 1.5px currentColor; color: transparent;
+    }
+
+    /* =====================================================
+       Top bar / nav
+    ===================================================== */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+      transition: background .5s var(--ease), backdrop-filter .5s var(--ease);
+      color: var(--paper);
+    }
+    .topbar.scrolled {
+      background: rgba(22,20,15,.85); backdrop-filter: blur(14px) saturate(140%);
+    }
+    .topbar.inverse { color: var(--ink); }
+    .topbar.inverse.scrolled { background: rgba(244,239,228,.9); color: var(--ink); }
+
+    .brand-mark {
+      display: flex; align-items: center; gap: .65rem;
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.15rem; font-weight: 500;
+      letter-spacing: -.01em;
+    }
+    .brand-mark svg { flex-shrink: 0; }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .18em;
+      text-transform: uppercase; position: relative; opacity: .78;
+      transition: opacity .25s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: -6px;
+      height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left;
+      transition: transform .35s var(--ease);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .top-right { display: flex; align-items: center; gap: 1rem; }
+    .pill {
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+      text-transform: uppercase; padding: .42rem .9rem;
+      border: 1px solid currentColor; border-radius: 999px;
+      opacity: .55; transition: opacity .25s, background .25s, color .25s;
+    }
+    .pill:hover { opacity: 1; }
+    .pill-solid {
+      background: var(--neon); color: var(--ink); border-color: var(--neon);
+      opacity: 1; font-weight: 500;
+    }
+    .pill-solid:hover { background: var(--ink); color: var(--neon); border-color: var(--ink); }
+
+    .burger { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+    .burger span { display: block; width: 22px; height: 1.5px; background: currentColor; }
+
+    /* =====================================================
+       HERO — editorial cinematic
+    ===================================================== */
+    #hero {
+      position: relative; min-height: 100svh; overflow: hidden;
+      background: var(--bleu-nuit); color: var(--paper);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding-top: 88px;
+    }
+
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+    /* Giant ghost wordmark behind everything */
+    .hero-ghost {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--serif);
+      font-size: clamp(20rem, 56vw, 64rem);
+      font-style: italic; font-weight: 300;
+      color: rgba(244,239,228,.04);
+      letter-spacing: -.05em; line-height: .8;
+      pointer-events: none; user-select: none;
+      white-space: nowrap; z-index: 1;
+    }
+
+    .hero-grid {
+      position: relative; z-index: 3;
+      display: grid; grid-template-columns: 1fr; gap: 3rem;
+      align-items: end;
+      padding: 4rem clamp(1.25rem, 4vw, 3rem) 0;
+      max-width: var(--container); margin: 0 auto; width: 100%;
+    }
+    @media (min-width: 900px) {
+      .hero-grid { grid-template-columns: 7fr 5fr; gap: 4rem; align-items: center; padding-top: 2rem; }
+    }
+
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: .9rem;
+      font-family: var(--mono); font-size: .7rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--or);
+      margin-bottom: 2rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp .9s .2s var(--ease) forwards;
+    }
+    .hero-kicker .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--or);
+      box-shadow: 0 0 0 4px rgba(231,200,98,.18);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 4px rgba(231,200,98,.18); }
+      50%     { box-shadow: 0 0 0 8px rgba(231,200,98,.05); }
+    }
+
+    .hero-title {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(4.5rem, 13vw, 13rem);
+      line-height: .85; letter-spacing: -.03em;
+      color: var(--paper);
+      margin-bottom: 2rem;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 1s .35s var(--ease) forwards;
+    }
+    .hero-title .li-1 { display: block; }
+    .hero-title .li-2 {
+      display: block;
+      font-style: italic; font-weight: 400;
+      font-variation-settings: 'opsz' 144;
+      color: var(--neon);
+      margin-left: clamp(.5rem, 4vw, 4rem);
+    }
+    .hero-title .li-3 {
+      display: block;
+      font-family: var(--sans);
+      font-size: .19em; letter-spacing: 0;
+      font-weight: 400; line-height: 1.4;
+      color: var(--glace); opacity: .8;
+      margin-top: 1.5rem; max-width: 28ch;
+    }
+
+    .hero-meta {
+      display: flex; align-items: flex-end; gap: 2.5rem; flex-wrap: wrap;
+      margin-top: 2.5rem;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 1s .55s var(--ease) forwards;
+    }
+    .hero-desc {
+      max-width: 320px;
+      font-size: .9rem; line-height: 1.65; color: rgba(244,239,228,.72);
+      border-left: 2px solid var(--rouge); padding-left: 1.1rem;
+    }
+    .hero-cta {
+      display: flex; gap: .8rem; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-family: var(--mono); font-size: .72rem; letter-spacing: .14em;
+      text-transform: uppercase; font-weight: 500;
+      padding: 1.05rem 1.7rem;
+      border-radius: 999px;
+      transition: transform .25s var(--ease), background .25s, color .25s, box-shadow .35s;
+    }
+    .btn-arrow {
+      width: 22px; height: 22px; border-radius: 50%; background: currentColor;
+      display: inline-grid; place-items: center; color: var(--ink);
+    }
+    .btn-arrow::after { content: '→'; color: var(--neon); font-size: 12px; }
+    .btn-primary { background: var(--neon); color: var(--ink); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(243,224,0,.3); }
+    .btn-ghost { background: transparent; color: var(--paper); border: 1px solid rgba(244,239,228,.3); }
+    .btn-ghost:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .btn-dark { background: var(--ink); color: var(--neon); }
+    .btn-dark:hover { transform: translateY(-2px); }
+
+    /* Hero product visual */
+    .hero-visual {
+      position: relative;
+      display: flex; justify-content: center; align-items: center;
+      opacity: 0; transform: translateY(40px);
+      animation: fadeUp 1.1s .7s var(--ease) forwards;
+    }
+    .pack-3d {
+      position: relative;
+      width: clamp(240px, 32vw, 360px);
+      aspect-ratio: 4/5;
+      border-radius: 4px;
+      overflow: visible;
+      animation: float 7s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(-1.5deg); }
+      50%     { transform: translateY(-14px) rotate(-2.5deg); }
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    .pack-photo {
+      position: relative; width: 100%; height: 100%;
+      background-size: cover; background-position: center;
+      background-color: var(--bleu-nuit);
+      border-radius: 6px; overflow: hidden;
+      filter: contrast(1.1) saturate(.82) brightness(.94);
+      box-shadow:
+        0 30px 60px rgba(0,0,0,.5),
+        0 10px 20px rgba(0,0,0,.3),
+        inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .pack-photo::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 65% 45% at 70% 15%, rgba(243,224,0,.25) 0%, transparent 55%),
+        linear-gradient(195deg, transparent 0%, transparent 40%, rgba(17,36,77,.65) 100%);
+    }
+    .pack-photo::after {
+      content: ''; position: absolute; inset: 0;
+      opacity: .12; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    }
+
+    /* Floating label band */
+    .pack-band {
+      position: absolute; left: 50%; bottom: -34px;
+      transform: translateX(-50%) rotate(-1.5deg);
+      background: var(--paper); color: var(--bleu-nuit);
+      padding: .9rem 1.6rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,.3);
+      display: flex; flex-direction: column; align-items: center;
+      gap: .2rem; min-width: 80%;
+      z-index: 3;
+    }
+    .pack-band-top {
+      font-family: var(--mono); font-size: .55rem; letter-spacing: .2em;
+      text-transform: uppercase; opacity: .6;
+    }
+    .pack-band-mid {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-variation-settings: 'opsz' 144;
+      font-size: 1.5rem; line-height: 1;
+    }
+    .pack-band-bot {
+      font-family: var(--mono); font-size: .55rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--rouge);
+      margin-top: .1rem;
+    }
+
+    .pack-stamp {
+      position: absolute; top: -28px; right: -22px;
+      width: 100px; height: 100px;
+      display: grid; place-items: center;
+      background: var(--neon); color: var(--ink);
+      border-radius: 50%;
+      transform: rotate(-12deg);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      z-index: 4;
+    }
+    .pack-stamp .stamp-rotate { animation: spin 18s linear infinite; width: 100%; height: 100%; }
+    .pack-stamp svg { width: 100%; height: 100%; }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Hero bottom bar — stats / scroll */
+    .hero-foot {
+      position: relative; z-index: 3;
+      border-top: 1px solid rgba(244,239,228,.12);
+      padding: 1.5rem clamp(1.25rem, 4vw, 3rem);
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 1.5rem;
+      max-width: var(--container); margin: 0 auto; width: 100%;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp .8s .9s var(--ease) forwards;
+    }
+    .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .hero-stats .stat {
+      display: flex; flex-direction: column; gap: .25rem;
+    }
+    .stat-n {
+      font-family: var(--serif); font-weight: 300;
+      font-size: 1.9rem; line-height: 1; letter-spacing: -.02em;
+      font-variation-settings: 'opsz' 144;
+    }
+    .stat-n em { font-style: italic; color: var(--or); }
+    .stat-l {
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+      text-transform: uppercase; opacity: .72;
+    }
+    .scroll-cue {
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .2em;
+      text-transform: uppercase; opacity: .72;
+      display: inline-flex; align-items: center; gap: .6rem;
+    }
+    .scroll-cue::before {
+      content: ''; width: 1px; height: 26px; background: currentColor;
+      animation: drop 1.6s ease-in-out infinite;
+    }
+    @keyframes drop {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* =====================================================
+       Marquee — tape
+    ===================================================== */
+    .tape {
+      background: var(--ink); color: var(--paper);
+      overflow: hidden; padding: 1.05rem 0;
+      border-top: 1px solid rgba(244,239,228,.05);
+    }
+    .tape-track {
+      display: flex; gap: 2.5rem; width: max-content;
+      animation: tape 38s linear infinite;
+    }
+    .tape-item {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.7rem; white-space: nowrap;
+      font-variation-settings: 'opsz' 144;
+    }
+    .tape-dot {
+      display: inline-grid; place-items: center; width: 1.7rem;
+      color: var(--neon); font-style: normal;
+    }
+    @keyframes tape { to { transform: translateX(-50%); } }
+
+    /* =====================================================
+       STORY — editorial spread
+    ===================================================== */
+    #story {
+      background: var(--paper);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      position: relative;
+    }
+    .story-grid {
+      display: grid; grid-template-columns: 1fr; gap: 4rem;
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+    @media (min-width: 900px) {
+      .story-grid {
+        grid-template-columns: 1fr 1fr; gap: 5rem;
+        align-items: start;
+      }
+    }
+
+    .story-left .eyebrow { color: var(--bleu); margin-bottom: 2rem; }
+    .story-title {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: .95; letter-spacing: -.02em;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .story-title em {
+      font-style: italic; color: var(--bleu);
+      font-variation-settings: 'opsz' 144;
+    }
+
+    .story-body p {
+      font-size: 1rem; line-height: 1.7; color: #3a362d;
+      margin-bottom: 1.1rem; max-width: 50ch;
+      font-weight: 400;
+    }
+    .story-body p:first-of-type::first-letter {
+      font-family: var(--serif);
+      font-weight: 400; font-style: italic;
+      font-size: 4.5rem; line-height: .9;
+      float: left; padding: .2rem .6rem .2rem 0;
+      color: var(--bleu);
+    }
+
+    .pillars { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
+    .pillar {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: .14em;
+      text-transform: uppercase; padding: .4rem .9rem;
+      border: 1px solid; border-radius: 999px;
+    }
+    .pillar.b { border-color: var(--bleu); color: var(--bleu); }
+    .pillar.r { border-color: var(--rouge); color: var(--rouge); }
+    .pillar.k { border-color: var(--ink); color: var(--ink); }
+
+    /* Right column — quote card */
+    .story-right { position: relative; display: flex; flex-direction: column; gap: 1.5rem; }
+    .story-photo {
+      position: relative;
+      width: 100%; aspect-ratio: 4/3;
+      background-size: cover; background-position: center;
+      border-radius: 4px; overflow: hidden;
+      filter: contrast(1.08) saturate(.78) brightness(.96);
+      box-shadow: 0 20px 40px rgba(17,36,77,.2);
+      transition: transform .8s var(--ease), filter .5s var(--ease);
+    }
+    .story-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 75% 15%, rgba(243,224,0,.2) 0%, transparent 55%),
+        linear-gradient(195deg, transparent 0%, transparent 45%, rgba(17,36,77,.45) 100%);
+    }
+    .story-photo:hover { transform: scale(1.02); filter: contrast(1.05) saturate(1); }
+    .quote-card {
+      background: var(--bleu-nuit); color: var(--paper);
+      border-radius: 4px;
+      padding: 3rem 2.5rem;
+      position: relative; overflow: hidden;
+      box-shadow:
+        0 1px 0 0 rgba(0,0,0,.06),
+        0 30px 60px -20px rgba(17,36,77,.35);
+    }
+    .quote-card::before {
+      content: '"'; position: absolute;
+      top: -2rem; left: 1rem;
+      font-family: var(--serif); font-style: italic;
+      font-size: 12rem; line-height: 1;
+      color: var(--neon); opacity: .1;
+    }
+    .quote-text {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      line-height: 1.25; font-weight: 300;
+      margin-bottom: 2rem;
+      font-variation-settings: 'opsz' 144;
+    }
+    .quote-attr {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--or);
+      padding-top: 2rem; border-top: 1px solid rgba(244,239,228,.12);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: .5rem;
+    }
+    .quote-attr .timestamp { opacity: .55; }
+
+    .heritage-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; margin-top: 1.5rem;
+      background: rgba(244,239,228,.08);
+    }
+    .heritage-strip > div {
+      background: var(--bleu-nuit); color: var(--paper);
+      padding: 1.3rem .7rem; text-align: center;
+    }
+    .h-n { font-family: var(--serif); font-weight: 300; font-size: 1.5rem; color: var(--neon); line-height: 1; font-variation-settings: 'opsz' 144; }
+    .h-l { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--paper); opacity: .78; margin-top: .45rem; }
+
+    /* =====================================================
+       SOUND PLAYER — vinyl + waveform
+    ===================================================== */
+    #son {
+      background: linear-gradient(180deg, var(--bleu-nuit) 0%, #0a173a 100%);
+      color: var(--paper);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      position: relative; overflow: hidden;
+    }
+    #son::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(231,200,98,.08), transparent 50%),
+                  radial-gradient(circle at 20% 80%, rgba(196,222,240,.05), transparent 50%);
+      pointer-events: none;
+    }
+    .son-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      position: relative; z-index: 1;
+    }
+    .son-head { text-align: center; margin-bottom: 4rem; }
+    .son-head .eyebrow { color: var(--glace); margin-bottom: 1.5rem; }
+    .son-title { font-family: var(--serif); font-weight: 300; font-size: clamp(2.6rem, 6.5vw, 5rem); line-height: 1; letter-spacing: -.02em; }
+    .son-title em { font-style: italic; color: var(--neon); font-variation-settings: 'opsz' 144; }
+
+    .player-shell {
+      display: grid; grid-template-columns: 1fr; gap: 3rem;
+      align-items: center;
+    }
+    @media (min-width: 900px) { .player-shell { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+
+    /* Vinyl visual */
+    .vinyl {
+      position: relative; width: 100%; max-width: 320px; margin: 0 auto;
+      aspect-ratio: 1; border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, #fcf6e3 0 14%, transparent 14.5%),
+        radial-gradient(circle at 50% 50%, var(--neon) 14% 18%, transparent 18.5%),
+        radial-gradient(circle at 50% 50%, #050505 0 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.04),
+        0 30px 60px rgba(0,0,0,.6);
+    }
+    .vinyl::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background:
+        repeating-radial-gradient(circle at 50% 50%,
+          rgba(255,255,255,.025) 0,
+          rgba(255,255,255,.025) 1px,
+          transparent 1px,
+          transparent 5px);
+    }
+    .vinyl::after {
+      content: ''; position: absolute; left: 50%; top: 50%;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--ink); transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.4);
+    }
+    .vinyl.on { animation: spin33 4s linear infinite; }
+    @keyframes spin33 { to { transform: rotate(360deg); } }
+
+    .vinyl-label {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 24%; aspect-ratio: 1; border-radius: 50%;
+      background: var(--paper); color: var(--ink);
+      display: grid; place-items: center; text-align: center;
+      font-family: var(--serif); font-size: .65rem;
+      padding: .5rem; line-height: 1.1;
+      pointer-events: none;
+    }
+    .vinyl-label em { display: block; font-style: italic; font-size: 1.2em; color: var(--bleu); }
+
+    /* Player card */
+    .player-card {
+      background: rgba(244,239,228,.04);
+      border: 1px solid rgba(244,239,228,.08);
+      backdrop-filter: blur(20px);
+      border-radius: 6px;
+      padding: 2rem 2rem 1.7rem;
+    }
+    .artist-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 1.2rem; margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(244,239,228,.1);
+      gap: 1rem; flex-wrap: wrap;
+    }
+    .ar-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; font-style: italic; font-variation-settings: 'opsz' 144; }
+    .ar-meta { font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--or); opacity: .8; }
+
+    .waveform { width: 100%; height: 70px; margin-bottom: 1.2rem; }
+    .wave-bar {
+      stroke: var(--neon); stroke-width: 1.8; fill: none;
+      stroke-dasharray: 1400; stroke-dashoffset: 0;
+    }
+    .wave-bar.on { animation: waverun 3s linear infinite; }
+    @keyframes waverun { to { stroke-dashoffset: -1400; } }
+
+    .player-controls { display: flex; align-items: center; gap: 1.2rem; position: relative; }
+    .play-note {
+      position: absolute; left: -8px; bottom: 100%;
+      transform: rotate(-4deg) translateY(-4px);
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-variation-settings: 'opsz' 144;
+      font-size: 1rem; color: var(--neon);
+      display: inline-flex; align-items: center; gap: .35rem;
+      pointer-events: none; white-space: nowrap;
+    }
+    @media (max-width: 600px) { .play-note { display: none; } }
+    .play-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--neon); color: var(--ink);
+      display: grid; place-items: center;
+      font-size: 1.1rem; transition: transform .2s, box-shadow .3s;
+      box-shadow: 0 6px 20px rgba(243,224,0,.3);
+    }
+    .play-btn:hover { transform: scale(1.05); box-shadow: 0 8px 28px rgba(243,224,0,.45); }
+    .track-info { flex: 1; min-width: 0; }
+    .track-name { font-family: var(--serif); font-size: 1.05rem; font-style: italic; font-variation-settings: 'opsz' 144; font-weight: 400; }
+    .track-sub { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; opacity: .7; margin-top: .15rem; }
+    .vol-stack { display: flex; flex-direction: column; align-items: flex-end; gap: .35rem; }
+    .vol-stack label { font-family: var(--mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; opacity: .65; }
+    .vol-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 90px; height: 2px; background: rgba(244,239,228,.18);
+      cursor: pointer;
+    }
+    .vol-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 12px; height: 12px;
+      background: var(--neon); border-radius: 50%;
+      border: 1px solid var(--ink);
+    }
+    .platforms {
+      display: flex; gap: .4rem; flex-wrap: wrap;
+      padding-top: 1.2rem; margin-top: 1.5rem;
+      border-top: 1px solid rgba(244,239,228,.08);
+    }
+    .platform {
+      font-family: var(--mono); font-size: .6rem; letter-spacing: .12em;
+      text-transform: uppercase; padding: .3rem .7rem;
+      border: 1px solid rgba(244,239,228,.2); border-radius: 999px;
+      opacity: .75;
+    }
+
+    /* =====================================================
+       LABEL — roster + radio
+    ===================================================== */
+    #label {
+      background: var(--ink); color: var(--paper);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      position: relative; overflow: hidden;
+    }
+    #label::before {
+      content: 'La Pie Records'; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-3deg);
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: clamp(8rem, 22vw, 20rem); color: rgba(243,224,0,.025);
+      letter-spacing: -.04em; line-height: 1; white-space: nowrap;
+      pointer-events: none; user-select: none;
+      font-variation-settings: 'opsz' 144;
+    }
+    .label-head {
+      max-width: var(--container); margin: 0 auto 4rem;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      position: relative; z-index: 1;
+      display: grid; gap: 2rem;
+    }
+    @media (min-width: 900px) {
+      .label-head { grid-template-columns: 6fr 4fr; align-items: end; }
+    }
+    .label-head .eyebrow { color: var(--neon); }
+    .label-h2 {
+      font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300; line-height: .92; letter-spacing: -.02em;
+      margin: 1.5rem 0 0;
+    }
+    .label-h2 em { font-style: italic; color: var(--neon); font-variation-settings: 'opsz' 144; }
+    .label-lead {
+      font-size: .95rem; line-height: 1.75;
+      color: rgba(244,239,228,.7); max-width: 42ch;
+    }
+    .label-lead strong { color: var(--neon); font-weight: 500; }
+
+    /* Roster grid */
+    .roster {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      position: relative; z-index: 1;
+      display: grid; gap: 1px;
+      background: rgba(244,239,228,.07);
+      border: 1px solid rgba(244,239,228,.07);
+      border-radius: 4px; overflow: hidden;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .roster { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .roster { grid-template-columns: repeat(3, 1fr); } }
+
+    .artist {
+      background: var(--ink);
+      padding: 2.2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      transition: background .3s;
+      position: relative;
+      min-height: 280px;
+    }
+    .artist:hover { background: #1c1a14; }
+    .artist.featured {
+      grid-column: span 1;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(243,224,0,.12), transparent 60%),
+        #0e0d09;
+    }
+    @media (min-width: 640px) {
+      .artist.featured { grid-column: span 2; min-height: 320px; }
+    }
+    @media (min-width: 1024px) {
+      .artist.featured { grid-column: span 2; grid-row: span 1; }
+    }
+
+    .artist-mono {
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--mono); font-size: .6rem; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(244,239,228,.65);
+    }
+    .artist.featured .artist-mono { color: var(--neon); }
+    .artist-num {
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .artist-num::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor;
+    }
+
+    .artist-name {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      line-height: .95; letter-spacing: -.02em;
+      color: var(--paper);
+    }
+    .artist.featured .artist-name {
+      font-size: clamp(2.8rem, 6.5vw, 4.5rem);
+    }
+    .artist-name em {
+      font-style: italic; color: var(--neon);
+      font-variation-settings: 'opsz' 144;
+      display: block;
+    }
+
+    .artist-line {
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: .95rem; line-height: 1.5;
+      color: rgba(244,239,228,.65); margin-top: auto;
+      max-width: 32ch; font-variation-settings: 'opsz' 144;
+    }
+    .artist.featured .artist-line {
+      font-size: 1.15rem; color: rgba(244,239,228,.8);
+      max-width: 38ch;
+    }
+
+    .artist-meta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      font-family: var(--mono); font-size: .6rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(244,239,228,.6);
+      padding-top: 1rem; border-top: 1px solid rgba(244,239,228,.1);
+    }
+    .artist.featured .artist-meta { color: rgba(243,224,0,.8); border-top-color: rgba(243,224,0,.25); }
+
+    /* Radio teaser */
+    .radio-teaser {
+      max-width: var(--container); margin: 3rem auto 0;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      position: relative; z-index: 1;
+    }
+    .radio-card {
+      background: var(--rouge); color: var(--paper);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+      align-items: center;
+      position: relative; overflow: hidden;
+    }
+    @media (min-width: 800px) { .radio-card { grid-template-columns: 1fr auto; padding: 3rem 2.5rem; } }
+
+    .radio-card::before {
+      content: ''; position: absolute;
+      top: -50%; right: -10%; width: 60%; aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(243,224,0,.18), transparent 70%);
+      pointer-events: none;
+    }
+    .radio-status {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      opacity: .85; margin-bottom: 1rem;
+    }
+    .radio-status::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--neon);
+      box-shadow: 0 0 0 4px rgba(243,224,0,.25);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .radio-title {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.5rem); line-height: .95;
+      letter-spacing: -.02em;
+    }
+    .radio-title em { font-style: italic; font-variation-settings: 'opsz' 144; }
+    .radio-desc {
+      font-size: .9rem; line-height: 1.7;
+      max-width: 50ch; margin-top: 1rem; opacity: .82;
+    }
+    .radio-desc b { color: var(--neon); font-weight: 500; }
+    .radio-cta {
+      font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
+      text-transform: uppercase; padding: 1rem 1.5rem;
+      background: var(--ink); color: var(--neon);
+      border-radius: 999px; white-space: nowrap;
+      transition: transform .25s, background .25s;
+    }
+    .radio-cta:hover { transform: translateY(-2px); background: #000; }
+
+    /* =====================================================
+       CREATION — open call
+    ===================================================== */
+    #creation {
+      background: var(--paper-2); padding: clamp(5rem, 12vw, 9rem) 0;
+      position: relative;
+    }
+    .creation-head {
+      max-width: var(--container); margin: 0 auto 4rem;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      display: grid; gap: 2rem;
+    }
+    @media (min-width: 800px) {
+      .creation-head { grid-template-columns: 6fr 4fr; align-items: end; }
+    }
+    .creation-head .eyebrow { color: var(--bleu); }
+    .creation-h2 {
+      font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300; line-height: .95; letter-spacing: -.02em;
+      margin: 1.5rem 0 0;
+    }
+    .creation-h2 em { font-style: italic; color: var(--bleu); font-variation-settings: 'opsz' 144; }
+    .creation-lead { font-size: .95rem; line-height: 1.7; color: #4a4538; max-width: 38ch; }
+
+    .creation-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+    @media (min-width: 720px) { .creation-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .cc {
+      background: var(--paper); border: 1px solid rgba(22,20,15,.1);
+      padding: 2rem 1.8rem; border-radius: 4px;
+      display: flex; flex-direction: column;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+      position: relative;
+    }
+    .cc:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(22,20,15,.07); }
+    .cc-num {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--bleu); opacity: .7;
+    }
+    .cc-title { font-family: var(--serif); font-size: 2rem; font-weight: 300; margin: .8rem 0 1rem; letter-spacing: -.02em; }
+    .cc-title em { font-style: italic; color: var(--bleu); font-variation-settings: 'opsz' 144; }
+    .cc-desc { font-size: .85rem; line-height: 1.65; color: #555; margin-bottom: 1.5rem; flex: 1; }
+    .cc-form { display: flex; flex-direction: column; gap: .55rem; }
+    .cc-input {
+      padding: .8rem 1rem; background: var(--paper-2);
+      border: 1px solid rgba(22,20,15,.08); border-radius: 4px;
+      font-family: var(--mono); font-size: .8rem; outline: none;
+      transition: border-color .2s;
+    }
+    .cc-input:focus { border-color: var(--bleu); }
+    .cc-submit {
+      padding: .8rem; background: var(--ink); color: var(--paper);
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .15em;
+      text-transform: uppercase; border-radius: 4px;
+      transition: background .2s;
+    }
+    .cc-submit:hover { background: var(--bleu); }
+
+    /* =====================================================
+       CREW — tiers
+    ===================================================== */
+    #crew {
+      background: var(--ink); color: var(--paper);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      position: relative; overflow: hidden;
+    }
+    #crew::after {
+      content: 'Crew'; position: absolute;
+      bottom: -3rem; right: -2rem; z-index: 0;
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(10rem, 28vw, 24rem); font-weight: 300;
+      color: rgba(244,239,228,.025); letter-spacing: -.04em;
+      pointer-events: none; user-select: none;
+      font-variation-settings: 'opsz' 144;
+    }
+    .crew-head {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem); position: relative; z-index: 1;
+    }
+    .crew-head .eyebrow { color: var(--or); }
+    .crew-h2 {
+      font-family: var(--serif); font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300; line-height: .95; letter-spacing: -.02em;
+      margin: 1.5rem 0 1rem;
+    }
+    .crew-h2 em { font-style: italic; color: var(--or); font-variation-settings: 'opsz' 144; }
+    .crew-lead { font-size: .92rem; line-height: 1.7; color: rgba(244,239,228,.6); max-width: 48ch; }
+
+    .crew-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+      max-width: var(--container); margin: 4rem auto 0;
+      padding: 0 clamp(1.25rem, 4vw, 3rem); position: relative; z-index: 1;
+    }
+    @media (min-width: 800px) { .crew-grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; } }
+
+    .tier {
+      padding: 2rem 1.8rem; border-radius: 4px;
+      border: 1px solid; display: flex; flex-direction: column;
+      transition: transform .35s var(--ease), background .35s;
+    }
+    .tier:hover { transform: translateY(-4px); }
+    .tier-1 { border-color: rgba(231,200,98,.4); background: rgba(231,200,98,.04); }
+    .tier-2 { border-color: rgba(196,222,240,.3); background: rgba(196,222,240,.03); }
+    .tier-3 { border-color: var(--neon); background: rgba(243,224,0,.06); }
+
+    .tier-num {
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .tier-1 .tier-num { color: var(--or); }
+    .tier-2 .tier-num { color: var(--glace); opacity: .7; }
+    .tier-3 .tier-num { color: var(--neon); }
+
+    .tier-name {
+      font-family: var(--serif); font-size: 1.9rem; font-weight: 300;
+      letter-spacing: -.02em; margin: .8rem 0 1.5rem;
+    }
+    .tier-name em { font-style: italic; font-variation-settings: 'opsz' 144; }
+
+    .tier-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; flex: 1; }
+    .tier-list li {
+      font-size: .82rem; line-height: 1.55; color: rgba(244,239,228,.72);
+      display: flex; gap: .65rem; align-items: flex-start;
+    }
+    .tier-list li::before {
+      content: ''; flex-shrink: 0;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; margin-top: .55rem;
+      opacity: .4;
+    }
+    .tier-3 .tier-list li::before { background: var(--neon); opacity: 1; }
+
+    .tier-cta {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .15em;
+      text-transform: uppercase; padding: .9rem 0; margin-top: 1.5rem;
+      border-top: 1px solid rgba(244,239,228,.1); text-align: center;
+      transition: color .2s;
+    }
+    .tier-cta:hover { color: var(--neon); }
+
+    /* =====================================================
+       SHOP — editorial product grid
+    ===================================================== */
+    #shop {
+      background: var(--paper);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+    }
+    .shop-head {
+      max-width: var(--container); margin: 0 auto 4rem;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      display: grid; gap: 2rem;
+    }
+    @media (min-width: 800px) {
+      .shop-head { grid-template-columns: 6fr 4fr; align-items: end; }
+    }
+    .shop-head .eyebrow { color: var(--bleu); }
+    .shop-h2 { font-family: var(--serif); font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 300; line-height: .9; letter-spacing: -.03em; margin: 1.5rem 0 0; }
+    .shop-h2 em { font-style: italic; color: var(--bleu); font-variation-settings: 'opsz' 144; }
+    .shop-lead { font-size: .95rem; line-height: 1.7; color: #4a4538; max-width: 38ch; }
+
+    .shop-grid {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+    @media (min-width: 600px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .product {
+      background: var(--paper-2); border-radius: 4px;
+      transition: transform .35s var(--ease);
+      cursor: pointer; position: relative;
+    }
+    .product:hover { transform: translateY(-5px); }
+    .product-img { border-top-left-radius: 4px; border-top-right-radius: 4px; }
+    .product:hover .product-img { filter: saturate(1.1); }
+
+    .product-img {
+      aspect-ratio: 4/3; position: relative;
+      background-size: cover; background-position: center;
+      background-color: var(--bleu-nuit);
+      overflow: hidden;
+      transition: transform .8s var(--ease), filter .5s var(--ease);
+      filter: contrast(1.08) saturate(.78) brightness(.96);
+    }
+    /* Branded color overlay — yellow highlight + blue shadow */
+    .product-img::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse 70% 50% at 75% 15%, rgba(243,224,0,.22) 0%, transparent 55%),
+        linear-gradient(195deg, transparent 0%, transparent 45%, rgba(17,36,77,.55) 100%);
+      pointer-events: none;
+    }
+    /* Subtle grain on photos */
+    .product-img::after {
+      content: ''; position: absolute; inset: 0; z-index: 2;
+      pointer-events: none; opacity: .15; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    }
+    .product:hover .product-img {
+      transform: scale(1.04);
+      filter: contrast(1.05) saturate(1) brightness(1);
+    }
+
+    /* Brand seal overlaid on each product photo */
+    .brand-seal {
+      position: absolute; bottom: 14px; right: 14px;
+      width: 64px; height: 64px;
+      display: grid; place-items: center;
+      background: var(--paper); color: var(--bleu-nuit);
+      border-radius: 50%;
+      transform: rotate(-6deg);
+      box-shadow: 0 6px 14px rgba(0,0,0,.18);
+      font-family: var(--serif); font-style: italic; font-size: .72rem;
+      font-variation-settings: 'opsz' 144; font-weight: 500;
+      text-align: center; line-height: 1; padding: .4rem;
+      z-index: 2;
+    }
+    .brand-seal .seal-top {
+      font-family: var(--mono); font-style: normal; font-size: .5rem;
+      letter-spacing: .1em; text-transform: uppercase; opacity: .65;
+      margin-bottom: .15rem;
+    }
+    .brand-seal .seal-mid {
+      font-family: var(--serif); font-style: italic; font-size: .95rem;
+      font-variation-settings: 'opsz' 144;
+    }
+
+    .product-tag {
+      position: absolute; top: 1rem; left: 1rem;
+      font-family: var(--mono); font-size: .58rem; letter-spacing: .14em;
+      text-transform: uppercase; padding: .3rem .65rem;
+      border-radius: 999px;
+    }
+    .tag-new { background: var(--neon); color: var(--ink); }
+    .tag-num { background: rgba(22,20,15,.85); color: var(--paper); }
+    .tag-bio { background: var(--vert); color: var(--paper); }
+
+    .product-body { padding: 1.4rem 1.4rem 1.5rem; }
+    .product-cat { font-family: var(--mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--bleu); opacity: .75; }
+    .product-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin: .5rem 0 .7rem; letter-spacing: -.01em; line-height: 1.15; }
+    .product-name em { font-style: italic; font-variation-settings: 'opsz' 144; }
+    .product-desc { font-size: .8rem; line-height: 1.6; color: #555; margin-bottom: 1.2rem; }
+    .product-meta { display: flex; justify-content: space-between; align-items: baseline; padding-top: 1rem; border-top: 1px solid rgba(22,20,15,.08); }
+    .product-price {
+      font-family: var(--serif); font-size: 1.5rem; font-weight: 500;
+      font-variation-settings: 'opsz' 144;
+      display: inline-flex; align-items: baseline; gap: .5rem;
+    }
+    .product-price s {
+      font-family: var(--mono); font-size: .72rem; color: var(--rouge);
+      font-weight: 400; font-style: normal;
+      text-decoration: line-through; text-decoration-thickness: 1.2px;
+      letter-spacing: .02em;
+    }
+    .product-add {
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+      text-transform: uppercase; padding: .55rem .85rem;
+      background: var(--ink); color: var(--paper); border-radius: 999px;
+      transition: background .2s, transform .2s;
+    }
+    .product-add:hover { background: var(--bleu); transform: scale(1.04); }
+    .product-add.added { background: var(--vert); }
+
+    /* =====================================================
+       RETAIL
+    ===================================================== */
+    #retail {
+      background: var(--paper-2);
+      padding: clamp(4rem, 9vw, 7rem) 0;
+      border-top: 1px solid rgba(22,20,15,.08);
+    }
+    .retail-inner {
+      max-width: var(--container); margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+    .retail-inner .eyebrow { color: var(--bleu); }
+    .retail-h2 { font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 300; line-height: .95; letter-spacing: -.02em; margin: 1.5rem 0 3rem; }
+    .retail-h2 em { font-style: italic; color: var(--bleu); font-variation-settings: 'opsz' 144; }
+
+    .retail-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 0; border: 1px solid rgba(22,20,15,.08); border-radius: 4px;
+      overflow: hidden; background: var(--paper);
+    }
+    @media (min-width: 640px) { .retail-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 900px) { .retail-grid { grid-template-columns: repeat(6, 1fr); } }
+
+    .retail-cell {
+      padding: 1.5rem 1.2rem;
+      border-right: 1px solid rgba(22,20,15,.06);
+      border-bottom: 1px solid rgba(22,20,15,.06);
+      transition: background .25s;
+    }
+    .retail-cell:hover { background: var(--glace); }
+    .ri-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--bleu);
+      display: inline-block; margin-bottom: .8rem;
+    }
+    .ri-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; }
+    .ri-type { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; color: #777; margin-top: .3rem; }
+    .retail-note { font-size: .82rem; line-height: 1.7; color: #555; max-width: 50ch; margin-top: 2rem; }
+
+    /* =====================================================
+       SIGNUP
+    ===================================================== */
+    #signup {
+      background: var(--rouge); color: var(--paper);
+      padding: clamp(5rem, 11vw, 8rem) 0;
+      position: relative; overflow: hidden;
+    }
+    #signup::before {
+      content: '✦ ✦ ✦ ✦ ✦ ✦'; position: absolute; inset: 0;
+      font-size: clamp(20rem, 60vw, 50rem); opacity: .04;
+      display: grid; place-items: center;
+      pointer-events: none; line-height: 1;
+    }
+    .signup-inner {
+      max-width: 680px; margin: 0 auto; text-align: center;
+      padding: 0 clamp(1.25rem, 4vw, 3rem); position: relative;
+    }
+    .signup-inner .eyebrow { color: rgba(244,239,228,.7); margin-bottom: 1.5rem; }
+    .signup-h2 { font-family: var(--serif); font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 300; line-height: .95; letter-spacing: -.02em; margin-bottom: 1rem; }
+    .signup-h2 em { font-style: italic; font-variation-settings: 'opsz' 144; }
+    .signup-lead { font-size: .9rem; opacity: .75; max-width: 38ch; margin: 0 auto 2.5rem; line-height: 1.65; }
+
+    .signup-form { display: flex; flex-direction: column; gap: .6rem; max-width: 500px; margin: 0 auto; }
+    @media (min-width: 500px) { .signup-form { flex-direction: row; } }
+    .signup-input {
+      flex: 1; padding: 1rem 1.3rem; border-radius: 999px;
+      background: var(--paper); color: var(--ink); border: none;
+      font-family: var(--mono); font-size: .8rem; outline: none;
+    }
+    .signup-input::placeholder { opacity: .45; }
+    .signup-btn {
+      padding: 1rem 1.7rem; background: var(--ink); color: var(--paper);
+      border-radius: 999px; font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      transition: transform .25s, background .25s;
+    }
+    .signup-btn:hover { transform: translateY(-2px); background: #000; }
+    .signup-fine { font-size: .65rem; opacity: .55; margin-top: 1.2rem; letter-spacing: .04em; }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+    footer {
+      background: var(--ink); color: var(--paper);
+      padding: clamp(4rem, 8vw, 6rem) 0 2rem;
+    }
+    .footer-inner { max-width: var(--container); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+    .footer-big {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(3.5rem, 12vw, 11rem); line-height: .9;
+      font-weight: 300; letter-spacing: -.03em;
+      margin-bottom: 4rem; color: var(--neon);
+      font-variation-settings: 'opsz' 144;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1fr; gap: 2.5rem;
+      padding-bottom: 3rem; border-bottom: 1px solid rgba(244,239,228,.08);
+    }
+    @media (min-width: 700px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+
+    .footer-brand-text {
+      font-family: var(--serif); font-size: .92rem; line-height: 1.7;
+      color: rgba(244,239,228,.72); max-width: 30ch; margin-bottom: 1.5rem;
+    }
+    .footer-brand-text strong { color: var(--paper); font-weight: 500; }
+    .footer-link-ext {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+      text-transform: uppercase; padding-bottom: 4px;
+      border-bottom: 1px solid rgba(244,239,228,.2);
+      color: var(--glace);
+      transition: color .2s, border-color .2s;
+    }
+    .footer-link-ext:hover { color: var(--neon); border-color: var(--neon); }
+
+    .socials { display: flex; gap: .5rem; margin-top: 1.5rem; }
+    .soc {
+      width: 36px; height: 36px; border: 1px solid rgba(244,239,228,.15);
+      border-radius: 50%; display: grid; place-items: center;
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .04em;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .soc:hover { border-color: var(--neon); color: var(--neon); }
+
+    .footer-col h4 {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--or); margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .footer-col a { font-family: var(--serif); font-size: .94rem; color: rgba(244,239,228,.72); transition: color .2s; }
+    .footer-col a:hover { color: var(--neon); }
+
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; padding-top: 2rem;
+    }
+    .footer-copy { font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; opacity: .55; }
+    .footer-stamp {
+      font-family: var(--serif); font-style: italic; font-size: 1rem;
+      color: var(--neon); opacity: .8; font-variation-settings: 'opsz' 144;
+    }
+
+    /* Back to top */
+    #btt {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--ink); color: var(--neon);
+      display: grid; place-items: center;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity .35s, transform .35s, background .25s;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    }
+    #btt.show { opacity: 1; transform: none; }
+    #btt:hover { background: var(--bleu); }
+
+    /* Reveal animation (Emil: keep UI motion under 500ms, stagger 30-80ms) */
+    .r { opacity: 0; transform: translateY(20px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    .r.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .06s; } .d2 { transition-delay: .12s; } .d3 { transition-delay: .18s; } .d4 { transition-delay: .24s; }
+
+    /* =====================================================
+       PERSONALITY — marker highlights, stickers, marginalia
+       (Don't look AI-generated. Look human.)
+    ===================================================== */
+
+    /* Highlighter pen — slightly uneven angles for hand-feel */
+    .mark {
+      position: relative; display: inline-block;
+      padding: 0 .15em;
+      background: linear-gradient(
+        104deg,
+        transparent .5%,
+        var(--neon) 1.5%,
+        var(--neon) 98.5%,
+        transparent 99.5%
+      );
+      background-size: 100% 68%;
+      background-repeat: no-repeat;
+      background-position: 0 85%;
+      color: var(--ink) !important;
+      font-style: normal;
+    }
+    .mark-red {
+      background-image: linear-gradient(104deg, transparent .5%, var(--rouge) 1.5%, var(--rouge) 98.5%, transparent 99.5%);
+      color: var(--paper) !important;
+    }
+    .mark-blue {
+      background-image: linear-gradient(104deg, transparent .5%, var(--bleu) 1.5%, var(--bleu) 98.5%, transparent 99.5%);
+      color: var(--paper) !important;
+    }
+
+    /* Rotated sticker — like a real adhesive */
+    .sticker {
+      position: absolute;
+      background: var(--neon); color: var(--ink);
+      padding: .55rem .9rem;
+      transform: rotate(-7deg);
+      font-family: var(--mono); font-size: .58rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+      z-index: 6; white-space: nowrap; line-height: 1.25;
+      text-align: center;
+      border-radius: 3px;
+    }
+    .sticker em {
+      display: block;
+      font-family: var(--serif); font-style: italic; font-weight: 500;
+      font-size: 1.5rem; letter-spacing: -.01em; line-height: 1;
+      text-transform: none; margin-top: .15rem;
+      font-variation-settings: 'opsz' 144;
+    }
+    .sticker-r { transform: rotate(9deg); }
+    .sticker-red { background: var(--rouge); color: var(--paper); }
+    .sticker-ink { background: var(--ink); color: var(--neon); }
+
+    /* Handwritten marker note */
+    .marginalia {
+      position: absolute;
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.05rem; letter-spacing: -.01em;
+      font-variation-settings: 'opsz' 144;
+      color: var(--rouge);
+      display: inline-flex; align-items: center; gap: .5rem;
+      transform: rotate(-3deg);
+      z-index: 4;
+      pointer-events: none;
+    }
+    .marginalia svg { flex-shrink: 0; opacity: .85; }
+    .marginalia.right { color: var(--neon); }
+
+    /* =====================================================
+       EMIL POLISH — press feedback, hover gating,
+       button responsiveness. Unseen details compound.
+    ===================================================== */
+
+    /* Every pressable element needs press feedback.
+       :active comes after :hover in source order, so it wins
+       during simultaneous match without !important. */
+    .btn,
+    .pill,
+    .pill-solid,
+    .nav-cta,
+    .play-btn,
+    .product-add,
+    .cc-submit,
+    .signup-btn,
+    .tier-cta,
+    .radio-cta,
+    .soc,
+    #btt {
+      transition-property: transform, background-color, color, border-color, box-shadow, opacity;
+      transition-duration: 160ms;
+      transition-timing-function: var(--ease);
+      will-change: transform;
+    }
+
+    .btn:active,
+    .pill:active,
+    .nav-cta:active,
+    .play-btn:active,
+    .product-add:active,
+    .cc-submit:active,
+    .signup-btn:active,
+    .tier-cta:active,
+    .radio-cta:active,
+    .soc:active,
+    #btt:active {
+      transform: scale(0.97);
+      transition-duration: 80ms;
+    }
+
+    /* Slightly less aggressive press on the big play button —
+       it has gravitas; full 0.97 would feel cartoonish */
+    .play-btn:active { transform: scale(0.94); }
+
+    /* Hover-only effects must be gated on touch devices —
+       otherwise tap = false hover trigger */
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(243,224,0,.3); }
+      .btn-ghost:hover   { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+      .btn-dark:hover    { transform: translateY(-2px); }
+      .signup-btn:hover  { transform: translateY(-2px); background: #000; }
+      .radio-cta:hover   { transform: translateY(-2px); background: #000; }
+      .play-btn:hover    { transform: scale(1.04); box-shadow: 0 8px 28px rgba(243,224,0,.45); }
+      .product-add:hover { background: var(--bleu); transform: scale(1.03); }
+      #btt:hover         { background: var(--bleu); }
+    }
+    @media (hover: none) {
+      /* Disable lift on touch — these are decorative, not feedback */
+      .btn:hover, .play-btn:hover, .product-add:hover,
+      .signup-btn:hover, .radio-cta:hover, .product:hover .product-img,
+      .tier:hover, .cc:hover, .product:hover, .retail-cell:hover, .story-photo:hover {
+        transform: none;
+      }
+    }
+
+    /* Focus rings (Emil: visible focus on EVERYTHING interactive) */
+    .btn:focus-visible,
+    .pill:focus-visible,
+    .nav-cta:focus-visible,
+    .play-btn:focus-visible,
+    .product-add:focus-visible,
+    .cc-submit:focus-visible,
+    .signup-btn:focus-visible,
+    .tier-cta:focus-visible,
+    .radio-cta:focus-visible,
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--neon);
+      outline-offset: 3px;
+      border-radius: 999px;
+    }
+    .cc-input:focus, .signup-input:focus { outline: none; }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(22,20,15,.97); flex-direction: column; gap: 1.4rem;
+        padding: 2rem clamp(1.25rem, 4vw, 3rem); }
+      .nav-links.open { display: flex; }
+      .burger { display: flex; }
+      .top-right .pill:not(.pill-solid) { display: none; }
+      .pack-stamp { width: 80px; height: 80px; top: -16px; right: -8px; }
+      .heritage-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#hero" id="btt" aria-label="Retour en haut">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 13V1M1 7L7 1L13 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+</a>
+
+<header class="topbar" id="topbar">
+  <a href="#hero" class="brand-mark">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path d="M11 2.5C7 2.5 3.5 5.5 3.5 9.5C3.5 11 4 12 5 13L4 19L8 17L11 19L14 17L18 19L17 13C18 12 18.5 11 18.5 9.5C18.5 5.5 15 2.5 11 2.5Z" fill="currentColor"/>
+      <circle cx="9" cy="9" r="1.2" fill="var(--bleu-nuit)"/>
+    </svg>
+    La Pie Qui Rap
+  </a>
+  <nav>
+    <ul class="nav-links" id="navlinks">
+      <li><a href="#story">Histoire</a></li>
+      <li><a href="#son">Le son</a></li>
+      <li><a href="#label">Le label</a></li>
+      <li><a href="#creation">Création</a></li>
+      <li><a href="#shop">Shop</a></li>
+    </ul>
+  </nav>
+  <div class="top-right">
+    <a href="https://www.lapiequichante.com" target="_blank" rel="noopener" class="pill">La Pie Qui Chante ↗</a>
+    <a href="#signup" class="pill pill-solid">Rejoindre</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-ghost">rap.</div>
+
+  <div class="hero-grid">
+    <div class="hero-text">
+      <span class="hero-kicker"><span class="dot"></span>Édition Printemps · 2026 · une création La Pie Qui Chante</span>
+
+      <h1 class="hero-title">
+        <span class="li-1">La Pie</span>
+        <span class="li-2">qui rap.</span>
+        <span class="li-3">Le son qui <span class="mark">glace ton été.</span> La menthe qui claque depuis 1955.</span>
+      </h1>
+
+      <div class="hero-meta">
+        <p class="hero-desc">
+          La Pie Qui Chante avait 70 ans. On lui a mis un micro. Même recette, nouvelle attitude.
+        </p>
+        <div class="hero-cta">
+          <a href="#son" class="btn btn-primary">Écouter le son <span class="btn-arrow"></span></a>
+          <a href="#shop" class="btn btn-ghost">Voir le shop</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="pack-3d">
+        <div class="pack-photo" style="background-image:url('https://images.unsplash.com/photo-1774569037132-cdf039aaafb3?auto=format&fit=crop&w=900&q=85')"></div>
+
+        <div class="pack-band">
+          <span class="pack-band-top">La Pie</span>
+          <span class="pack-band-mid">qui rap.</span>
+          <span class="pack-band-bot">Menthe glacée · 150g</span>
+        </div>
+
+        <div class="pack-stamp">
+          <div class="stamp-rotate">
+            <svg viewBox="0 0 100 100">
+              <defs>
+                <path id="circlePath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
+              </defs>
+              <text font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2" fill="#16140f">
+                <textPath href="#circlePath">MADE IN FRANCE · 100% FRAIS · MADE IN FRANCE · 100% FRAIS · </textPath>
+              </text>
+            </svg>
+          </div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1;text-align:center">
+            <div>
+              <div style="font-family:var(--mono);font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-bottom:.15rem">Édition</div>
+              <div style="font-variation-settings:'opsz' 144;font-weight:500">2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-n"><em data-count="1955">0</em></span>
+        <span class="stat-l">Année de création</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n"><em data-count="12">0</em></span>
+        <span class="stat-l">Pays distribués</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n"><em data-count="4">0</em><span style="opacity:.4">s</span></span>
+        <span class="stat-l">Entre 2 sachets vendus</span>
+      </div>
+    </div>
+    <span class="scroll-cue">Faites défiler</span>
+  </div>
+</section>
+
+<!-- ========== TAPE ========== -->
+<div class="tape" aria-hidden="true">
+  <div class="tape-track">
+    <span class="tape-item">Le bonbon du son</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">La Pie a grandi. Elle rappe.</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Made in France · 100% frais</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Menthe glacée · Édition 2026</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Depuis 1955</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Le bonbon du son</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">La Pie a grandi. Elle rappe.</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Made in France · 100% frais</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Menthe glacée · Édition 2026</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Depuis 1955</span><span class="tape-item tape-dot">✦</span>
+  </div>
+</div>
+
+<!-- ========== STORY ========== -->
+<section id="story">
+  <div class="story-grid">
+    <div class="story-left">
+      <span class="eyebrow r">Notre histoire</span>
+      <h2 class="story-title r d1">La Pie a grandi.<br><em>Elle <span class="mark mark-red">rappe.</span></em></h2>
+      <div class="story-body">
+        <p class="r d2">En 1955, La Pie Qui Chante invente un bonbon menthe qui marque toute une génération. Soixante-dix ans plus tard, la confiserie décide de ne pas fêter ça sagement avec un gâteau d'anniversaire.</p>
+        <p class="r d2">La Pie Qui Rap est une édition limitée née de la rencontre entre un patrimoine confiseur français et une culture musicale qui partage la même exigence : faire quelque chose de propre, avec peu de moyens, pour beaucoup de gens.</p>
+        <p class="r d2">Même recette d'origine. Packaging repensé. Distribution en GMS et en ligne. Une partie des bénéfices finance des résidences artistiques en France.</p>
+        <div class="pillars r d3">
+          <span class="pillar b">Héritage</span>
+          <span class="pillar b">Indépendant</span>
+          <span class="pillar r">Édition Limitée</span>
+          <span class="pillar k">Made in France</span>
+          <span class="pillar b">Circuit court</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-right">
+      <div class="story-photo r d1" style="background-image:url('https://images.unsplash.com/photo-1768213049230-7d4bcea01b9e?auto=format&fit=crop&w=900&q=80')"></div>
+      <div class="quote-card r d2">
+        <p class="quote-text">"La Pie Qui Chante avait 70 ans. On lui a mis un micro, et on lui a demandé ce qu'elle avait à dire."</p>
+        <div class="quote-attr">
+          <span>L. Mercier · Direction artistique</span>
+          <span class="timestamp">FR · 03.2026</span>
+        </div>
+      </div>
+      <div class="heritage-strip r d3">
+        <div><div class="h-n">1955</div><div class="h-l">Fondée</div></div>
+        <div><div class="h-n">12</div><div class="h-l">Pays</div></div>
+        <div><div class="h-n">FR</div><div class="h-l">Fabriqué en</div></div>
+        <div><div class="h-n">150g</div><div class="h-l">Par sachet</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SON ========== -->
+<section id="son">
+  <div class="son-inner">
+    <div class="son-head">
+      <span class="eyebrow r">Expérience sonore · Avant-première</span>
+      <h2 class="son-title r d1">Le son qui<br><em>glace ton été.</em></h2>
+    </div>
+
+    <div class="player-shell">
+      <div class="vinyl r d2" id="vinyl">
+        <div class="vinyl-label">
+          <em>La Pie</em>
+          Fraîche la Peufra 2026<br>
+          Side A
+        </div>
+      </div>
+
+      <div class="player-card r d3">
+        <div class="artist-row">
+          <span class="ar-name">Fraîche la Peufra × La Pie Qui Rap</span>
+          <span class="ar-meta">30s · Sortie 13.06.2026</span>
+        </div>
+
+        <svg class="waveform" viewBox="0 0 800 70" aria-hidden="true">
+          <path id="wavepath" class="wave-bar"
+            d="M0,35 C25,8 50,62 75,35 C100,8 125,62 150,35 C175,8 200,62 225,35
+               C250,8 275,62 300,35 C325,8 350,62 375,35 C400,8 425,62 450,35
+               C475,8 500,62 525,35 C550,8 575,62 600,35 C625,8 650,62 675,35
+               C700,8 725,62 750,35 C775,8 800,62 825,35"/>
+        </svg>
+
+        <div class="player-controls">
+          <span class="play-note" aria-hidden="true">
+            <svg width="32" height="22" viewBox="0 0 32 22" fill="none">
+              <path d="M30 17 Q22 12 14 12 Q8 12 4 8" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <path d="M2 6 L4 8 L6 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            écoute c'est cadeau
+          </span>
+          <button class="play-btn" id="playbtn" aria-label="Lecture / Pause">▶</button>
+          <div class="track-info">
+            <div class="track-name">Ils menthe — Fraîche la Peufra</div>
+            <div class="track-sub" id="tracktime">00:00 / 00:00 · La Pie Records</div>
+          </div>
+          <div class="vol-stack">
+            <label for="volslider">Volume</label>
+            <input type="range" id="volslider" class="vol-slider" min="0" max="1" step=".01" value=".7" aria-label="Volume">
+          </div>
+        </div>
+        <audio id="audiotrack" preload="metadata" src="menthe-fraiche-la-peufra.mp3"></audio>
+
+        <div class="platforms">
+          <span class="platform">Spotify</span>
+          <span class="platform">Apple Music</span>
+          <span class="platform">Deezer</span>
+          <span class="platform">YouTube Music</span>
+          <span class="platform">Tidal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LABEL ========== -->
+<section id="label">
+  <div class="label-head">
+    <div>
+      <span class="eyebrow r">La Pie Records · Label musical indépendant</span>
+      <h2 class="label-h2 r d1">Le label,<br><em><span class="mark">c'est nous.</span></em></h2>
+    </div>
+    <p class="label-lead r d2">
+      La Pie Records, c'est le label musical de La Pie Qui Rap. Six artistes signés,
+      des sessions enregistrées entre deux drops de bonbons. Bientôt : <strong>La Pie Sessions</strong>,
+      notre format freestyle long inspiré de ce que Grünt a installé.
+    </p>
+  </div>
+
+  <div class="roster">
+    <article class="artist featured r" style="position:relative">
+      <span class="sticker sticker-r" style="top:18px;right:18px">
+        Coup de cœur<em>du label</em>
+      </span>
+      <div class="artist-mono">
+        <span class="artist-num">N°01 · Tête d'affiche</span>
+        <span>Marseille → Paris</span>
+      </div>
+      <h3 class="artist-name">Fraîche<em>la Peufra.</em></h3>
+      <p class="artist-line">"Plus glaciale qu'un sachet de menthe oublié au congélo. Plume rapide, refrains qui claquent — la voix du label."</p>
+      <div class="artist-meta">
+        <span>Rap mélodique</span>
+        <span>·</span>
+        <span>Debut EP 06.2026</span>
+        <span>·</span>
+        <span>4 singles</span>
+      </div>
+    </article>
+
+    <article class="artist r d1">
+      <div class="artist-mono">
+        <span class="artist-num">N°02</span>
+        <span>Évry</span>
+      </div>
+      <h3 class="artist-name">Koba<em>la Fraîche.</em></h3>
+      <p class="artist-line">"Drill froide, kicks lourds, le flow qui s'adapte au tempo."</p>
+      <div class="artist-meta"><span>Drill / Trap</span><span>·</span><span>3 freestyles</span></div>
+    </article>
+
+    <article class="artist r d2">
+      <div class="artist-mono">
+        <span class="artist-num">N°03</span>
+        <span>Boulogne</span>
+      </div>
+      <h3 class="artist-name">Frinho<em>.</em></h3>
+      <p class="artist-line">"Mélodies pour l'été qui dure. Spotify l'aime déjà."</p>
+      <div class="artist-meta"><span>Mélodique / Cloud</span><span>·</span><span>2 EP</span></div>
+    </article>
+
+    <article class="artist r">
+      <div class="artist-mono">
+        <span class="artist-num">N°04</span>
+        <span>Boulogne-Bnt</span>
+      </div>
+      <h3 class="artist-name">Bouba<em>Vanille.</em></h3>
+      <p class="artist-line">"Vétéran. Toujours le même flow, jamais le même goût."</p>
+      <div class="artist-meta"><span>Rap classique</span><span>·</span><span>1 album studio</span></div>
+    </article>
+
+    <article class="artist r d1">
+      <div class="artist-mono">
+        <span class="artist-num">N°05</span>
+        <span>Lyon</span>
+      </div>
+      <h3 class="artist-name">Glaço<em>.</em></h3>
+      <p class="artist-line">"Punchlines qui mordent, ego trip qui dure 3 minutes."</p>
+      <div class="artist-meta"><span>Egotrip / Punchline</span><span>·</span><span>1 mixtape</span></div>
+    </article>
+
+    <article class="artist r d2">
+      <div class="artist-mono">
+        <span class="artist-num">N°06</span>
+        <span>Paris</span>
+      </div>
+      <h3 class="artist-name">DJ Vanille<em>Ice.</em></h3>
+      <p class="artist-line">"Aux platines, aux beats, aux samples. La signature sonore du label."</p>
+      <div class="artist-meta"><span>DJ / Producteur</span><span>·</span><span>Beatmaker maison</span></div>
+    </article>
+  </div>
+
+  <div class="radio-teaser">
+    <div class="radio-card r">
+      <div>
+        <span class="radio-status">En préparation · Lancement Septembre 2026</span>
+        <h3 class="radio-title">La Pie <em>Sessions.</em></h3>
+        <p class="radio-desc">
+          Format radio long, freestyles bruts, plusieurs artistes par épisode — l'idée qu'on aime
+          chez <b>Grünt</b>, déclinée à notre sauce menthe glacée. Premier épisode tourné en studio
+          mobile avec les six artistes du label, captation 6 caméras, mix live.
+          À écouter dès la rentrée 2026 sur le site et toutes les plateformes audio.
+        </p>
+      </div>
+      <a href="#signup" class="radio-cta">Être prévenu →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CREATION ========== -->
+<section id="creation">
+  <div class="creation-head">
+    <div>
+      <span class="eyebrow r">Appel à projets · Trimestriel</span>
+      <h2 class="creation-h2 r d1">Création<br><em>Ouverte.</em></h2>
+    </div>
+    <p class="creation-lead r d2">Chaque trimestre, La Pie Qui Rap sélectionne trois créateurs — un visuel, un son, un texte — dont le travail sera imprimé sur un sachet édition limitée vendu en GMS.</p>
+  </div>
+
+  <div class="creation-grid">
+    <div class="cc r">
+      <span class="cc-num">N°01 / Visuel</span>
+      <h3 class="cc-title"><em>Visuel.</em></h3>
+      <p class="cc-desc">Illustration, photographie, motion design ou typographie. Format final : packaging sachet 150g, CMJN, 300 dpi.</p>
+      <form class="cc-form" onsubmit="handleCreation(event,this)">
+        <input class="cc-input" type="email" placeholder="votre@email.fr" required aria-label="Email">
+        <input class="cc-input" type="url" placeholder="Lien portfolio ou Behance" required aria-label="Portfolio">
+        <button class="cc-submit" type="submit">Soumettre →</button>
+      </form>
+    </div>
+
+    <div class="cc r d1">
+      <span class="cc-num">N°02 / Son</span>
+      <h3 class="cc-title"><em>Son.</em></h3>
+      <p class="cc-desc">Morceau original, beat, sample ou composition acoustique. Durée 2 à 4 minutes. Formats : WAV, FLAC, MP3 320 kbps.</p>
+      <form class="cc-form" onsubmit="handleCreation(event,this)">
+        <input class="cc-input" type="email" placeholder="votre@email.fr" required aria-label="Email">
+        <input class="cc-input" type="url" placeholder="Lien SoundCloud ou WeTransfer" required aria-label="Lien">
+        <button class="cc-submit" type="submit">Soumettre →</button>
+      </form>
+    </div>
+
+    <div class="cc r d2">
+      <span class="cc-num">N°03 / Texte</span>
+      <h3 class="cc-title"><em>Texte.</em></h3>
+      <p class="cc-desc">Slam, paroles, microfiction ou poésie en rapport avec la marque ou la menthe. 1 500 signes maximum, langue française.</p>
+      <form class="cc-form" onsubmit="handleCreation(event,this)">
+        <input class="cc-input" type="email" placeholder="votre@email.fr" required aria-label="Email">
+        <textarea class="cc-input" rows="3" placeholder="Collez votre texte (1500 signes max)" maxlength="1500" required aria-label="Texte"></textarea>
+        <button class="cc-submit" type="submit">Soumettre →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CREW ========== -->
+<section id="crew">
+  <div class="crew-head">
+    <span class="eyebrow r">Programme ambassadeurs</span>
+    <h2 class="crew-h2 r d1">Le Crew<br><em>Program.</em></h2>
+    <p class="crew-lead r d2">Trois niveaux d'implication. Chaque palier débloque des avantages concrets — pas de la communication de marque, des bénéfices réels.</p>
+  </div>
+
+  <div class="crew-grid">
+    <div class="tier tier-1 r">
+      <span class="tier-num">N°01 / Pigeonnier</span>
+      <h3 class="tier-name"><em>Pigeonnier</em></h3>
+      <ul class="tier-list">
+        <li>Accès au Discord communautaire</li>
+        <li>Avant-premières sur les drops</li>
+        <li>Badge numérique de membre</li>
+        <li>1 sachet collector à l'inscription</li>
+      </ul>
+      <a href="#signup" class="tier-cta">Rejoindre — gratuit →</a>
+    </div>
+
+    <div class="tier tier-2 r d1">
+      <span class="tier-num">N°02 / Ambassadeur</span>
+      <h3 class="tier-name"><em>Ambassadeur</em></h3>
+      <ul class="tier-list">
+        <li>Tout le niveau 01</li>
+        <li>Code de parrainage personnel (−15 %)</li>
+        <li>Commission sur chaque vente référée</li>
+        <li>Invitations concerts partenaires 2026</li>
+        <li>Kit physique expédié</li>
+      </ul>
+      <a href="#signup" class="tier-cta">Sur dossier →</a>
+    </div>
+
+    <div class="tier tier-3 r d2">
+      <span class="tier-num">N°03 / Élite · Sélection</span>
+      <h3 class="tier-name"><em>La Pie Élite</em></h3>
+      <ul class="tier-list">
+        <li>Tout le niveau 02</li>
+        <li>Packaging sachet co-signé</li>
+        <li>Visibilité sur les comptes officiels</li>
+        <li>Accès résidence artistique (1 week-end)</li>
+        <li>Royalties sur le produit co-conçu</li>
+      </ul>
+      <a href="#signup" class="tier-cta">Sélection trimestrielle →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SHOP ========== -->
+<section id="shop">
+  <div class="shop-head">
+    <div>
+      <span class="eyebrow r">Boutique · Éditions limitées</span>
+      <h2 class="shop-h2 r d1">Le <em>Shop.</em></h2>
+    </div>
+    <p class="shop-lead r d2">Des objets liés à la confiserie, pas à un vestiaire imaginaire. Chaque pièce est produite en petite série, en France ou en Europe.</p>
+  </div>
+
+  <div class="shop-grid">
+    <article class="product r">
+      <span class="sticker sticker-red" style="top:-14px;left:-12px">
+        Best<em>seller</em>
+      </span>
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1765174639852-73f77b49e3c6?auto=format&fit=crop&w=900&q=80')">
+        <span class="product-tag tag-new">Nouveau</span>
+        <div class="brand-seal">
+          <span class="seal-top">Édition</span>
+          <span class="seal-mid">2026</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">Confiserie · Sachet 150g</span>
+        <h3 class="product-name">Menthe Glacée — <em>Collector</em></h3>
+        <p class="product-desc">La recette de 1955. Sachet illustré par un artiste sélectionné. Tirage 10 000 ex.</p>
+        <div class="product-meta">
+          <span class="product-price">1,90 €</span>
+          <button class="product-add" onclick="addToCart(this)">Ajouter</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product r d1">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1777213000072-b8c733be537f?auto=format&fit=crop&w=900&q=80')">
+        <span class="product-tag tag-num">300 ex.</span>
+        <div class="brand-seal">
+          <span class="seal-top">N°</span>
+          <span class="seal-mid">/300</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">Collector · Boîte métal sérigraphiée</span>
+        <h3 class="product-name">Tin 500g — <em>Numérotée</em></h3>
+        <p class="product-desc">Boîte métal imprimée à la main par Riso&amp;Co (Lyon). Numérotée et signée.</p>
+        <div class="product-meta">
+          <span class="product-price">14,00 €</span>
+          <button class="product-add" onclick="addToCart(this)">Ajouter</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product r d2">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=80')">
+        <span class="product-tag tag-bio">Coton bio</span>
+        <div class="brand-seal">
+          <span class="seal-top">GOTS</span>
+          <span class="seal-mid">320g</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">Accessoire · Tote bag</span>
+        <h3 class="product-name">Tote 320g — <em>Risographe</em></h3>
+        <p class="product-desc">Coton biologique GOTS, 320 g/m². Sérigraphie 2 couleurs. Fabriqué au Portugal.</p>
+        <div class="product-meta">
+          <span class="product-price"><s>28,00 €</s>22,00 €</span>
+          <button class="product-add" onclick="addToCart(this)">Ajouter</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product r">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1597919697518-faa400f9403c?auto=format&fit=crop&w=900&q=80')">
+        <span class="product-tag tag-new">Pack 6</span>
+        <div class="brand-seal">
+          <span class="seal-top">×6</span>
+          <span class="seal-mid">FR</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">Papeterie · Pack de 6 stickers vinyle</span>
+        <h3 class="product-name">Sticker Pack — <em>Vinyle mat</em></h3>
+        <p class="product-desc">6 designs originaux. Vinyle anti-UV, waterproof. Impression numérique HD.</p>
+        <div class="product-meta">
+          <span class="product-price">8,00 €</span>
+          <button class="product-add" onclick="addToCart(this)">Ajouter</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product r d1">
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1616714109948-c74fe5029a4d?auto=format&fit=crop&w=900&q=80')">
+        <span class="product-tag tag-num">300 ex.</span>
+        <div class="brand-seal">
+          <span class="seal-top">45</span>
+          <span class="seal-mid">RPM</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">Musique · Vinyle 7 pouces</span>
+        <h3 class="product-name">Fraîche la Peufra — <em>Ils menthe (45t)</em></h3>
+        <p class="product-desc">"Ils menthe" — le single de Fraîche la Peufra en pressage limité 300 ex. Pochette sérigraphiée 2 couleurs, signée par l'artiste.</p>
+        <div class="product-meta">
+          <span class="product-price">12,00 €</span>
+          <button class="product-add" onclick="addToCart(this)">Précommander</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product r d2">
+      <span class="sticker sticker-ink" style="top:-12px;right:-12px">
+        −17%<em>l'pack</em>
+      </span>
+      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1674620213535-9b2a2553ef40?auto=format&fit=crop&w=900&q=80')">
+        <span class="product-tag tag-new">Bundle</span>
+        <div class="brand-seal">
+          <span class="seal-top">×4</span>
+          <span class="seal-mid">−17%</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <span class="product-cat">Pack · L'Essentiel Pie Qui Rap</span>
+        <h3 class="product-name">L'Essentiel — <em>Pack 4 pièces</em></h3>
+        <p class="product-desc">Le sachet collector menthe glacée 150g + la boîte métal 500g + le tote bag + le pack stickers. Tout dans un emballage recyclé, livraison offerte en France métro.</p>
+        <div class="product-meta">
+          <span class="product-price"><s>46,00 €</s>38,00 €</span>
+          <button class="product-add" onclick="addToCart(this)">Tout prendre</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========== RETAIL ========== -->
+<section id="retail">
+  <div class="retail-inner">
+    <span class="eyebrow r">Points de vente</span>
+    <h2 class="retail-h2 r d1">En rayon, près de <em>chez vous.</em></h2>
+
+    <div class="retail-grid r d2">
+      <div class="retail-cell"><span class="ri-dot"></span><div class="ri-name">Monoprix</div><div class="ri-type">Grande surface · 290 magasins</div></div>
+      <div class="retail-cell"><span class="ri-dot" style="background:#c93838"></span><div class="ri-name">Carrefour</div><div class="ri-type">Hyper · Super · City</div></div>
+      <div class="retail-cell"><span class="ri-dot" style="background:#e7c862"></span><div class="ri-name">Leclerc</div><div class="ri-type">Grande surface · Drive</div></div>
+      <div class="retail-cell"><span class="ri-dot" style="background:#2e5d3b"></span><div class="ri-name">Fnac</div><div class="ri-type">Cadeau · Caisse · Online</div></div>
+      <div class="retail-cell"><span class="ri-dot" style="background:#6b21a8"></span><div class="ri-name">Cultura</div><div class="ri-type">Art & culture · 80 magasins</div></div>
+      <div class="retail-cell"><span class="ri-dot" style="background:#16140f"></span><div class="ri-name">Notre boutique</div><div class="ri-type">En ligne · FR & EU</div></div>
+    </div>
+
+    <p class="retail-note r d3">Le sachet 150g est référencé en GMS depuis mars 2026. Les éditions collector (Tin sérigraphiée, vinyle 45t Fraîche la Peufra, stickers) sont disponibles uniquement sur notre boutique en ligne et chez nos revendeurs culturels partenaires.</p>
+  </div>
+</section>
+
+<!-- ========== SIGNUP ========== -->
+<section id="signup">
+  <div class="signup-inner">
+    <span class="eyebrow r">Newsletter · Maximum 2 envois / mois</span>
+    <h2 class="signup-h2 r d1">Restez dans <em>la boucle.</em></h2>
+    <p class="signup-lead r d2">Drops en avant-première, dates de concerts, appels à projets. Pas de spam, pas de pub déguisée. Désinscription en un clic.</p>
+
+    <form class="signup-form r d3" onsubmit="handleSignup(event)">
+      <input class="signup-input" type="email" placeholder="votre@email.fr" required aria-label="Email">
+      <button class="signup-btn" type="submit">S'inscrire →</button>
+    </form>
+
+    <p class="signup-fine r d3">RGPD · Aucun spam · Désinscription instantanée</p>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-big">Le bonbon<br><em>du son.</em></p>
+
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand-text">Une édition limitée créée par <strong>La Pie Qui Chante</strong>, confiseur français depuis 1955.</p>
+        <a href="https://www.lapiequichante.com" target="_blank" rel="noopener" class="footer-link-ext">lapiequichante.com ↗</a>
+        <div class="socials">
+          <a href="#" class="soc" aria-label="TikTok">TK</a>
+          <a href="#" class="soc" aria-label="Instagram">IG</a>
+          <a href="#" class="soc" aria-label="YouTube">YT</a>
+          <a href="#" class="soc" aria-label="Spotify">SP</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Marque</h4>
+        <ul>
+          <li><a href="#story">L'histoire</a></li>
+          <li><a href="#son">Le son</a></li>
+          <li><a href="#label">La Pie Records</a></li>
+          <li><a href="#creation">Création Ouverte</a></li>
+          <li><a href="#crew">Crew Program</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#shop">Sachet Collector</a></li>
+          <li><a href="#shop">Tin sérigraphié</a></li>
+          <li><a href="#shop">Tote bag</a></li>
+          <li><a href="#retail">Points de vente</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Infos</h4>
+        <ul>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">CGV</a></li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">Contact presse</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 La Pie Qui Rap · Édition de La Pie Qui Chante · Tous droits réservés</p>
+      <p class="footer-stamp">Fait main · 100% Frais · 0% IA*</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Nav scroll state */
+const bar = document.getElementById('topbar');
+const burger = document.getElementById('burger');
+const navlinks = document.getElementById('navlinks');
+const sections = ['story', 'creation', 'shop', 'retail'];
+function updateNav() {
+  bar.classList.toggle('scrolled', scrollY > 30);
+  /* Light bg sections need inverse nav */
+  let inverse = false;
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const r = el.getBoundingClientRect();
+    if (r.top < 80 && r.bottom > 80) { inverse = true; break; }
+  }
+  bar.classList.toggle('inverse', inverse);
+  document.getElementById('btt').classList.toggle('show', scrollY > 600);
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+burger.addEventListener('click', () => {
+  const open = navlinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+});
+navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navlinks.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+}));
+
+/* Reveal on scroll */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+/* Animated counters */
+function animCount(el) {
+  const target = +el.dataset.count;
+  const dur = 1500;
+  let cur = 0;
+  const t = setInterval(() => {
+    cur = Math.min(cur + target / (dur / 16), target);
+    el.textContent = Math.floor(cur).toLocaleString('fr-FR');
+    if (cur >= target) clearInterval(t);
+  }, 16);
+}
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { animCount(e.target); cio.unobserve(e.target); }
+}), { threshold: .4 });
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+/* Cart */
+function addToCart(btn) {
+  const original = btn.textContent;
+  btn.textContent = '✓ Ajouté';
+  btn.classList.add('added');
+  setTimeout(() => { btn.textContent = original; btn.classList.remove('added'); }, 1800);
+}
+
+/* Forms */
+function handleCreation(e, form) {
+  e.preventDefault();
+  const btn = form.querySelector('.cc-submit');
+  btn.textContent = '✓ Reçu';
+  btn.style.background = '#2e5d3b';
+  btn.disabled = true;
+  form.querySelectorAll('input,textarea').forEach(f => f.disabled = true);
+}
+function handleSignup(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.signup-btn');
+  btn.textContent = '✓ Bienvenue';
+  e.target.querySelector('input').disabled = true;
+  btn.disabled = true;
+}
+
+/* Mouse parallax on hero */
+const heroVisual = document.querySelector('.pack-3d');
+const hero = document.getElementById('hero');
+if (heroVisual && hero) {
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    heroVisual.style.transform = `translate(${x * 14}px, ${y * 10}px) rotate(${-1.5 + x * 2}deg)`;
+  });
+  hero.addEventListener('mouseleave', () => {
+    heroVisual.style.transform = '';
+  });
+}
+
+/* =====================================================
+   Generative particle field — "Menthe Statique" v2
+   Refined version: glowing dust + connection web
+===================================================== */
+(function() {
+  const cvs = document.getElementById('hero-canvas');
+  if (!cvs) return;
+  const ctx = cvs.getContext('2d');
+  let W, H, particles;
+  const COUNT = 75;
+  const LINK = 140;
+
+  /* seeded PRNG */
+  let seed = 2026;
+  const rand = () => {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+
+  const perm = new Uint8Array(512);
+  for (let i = 0; i < 256; i++) perm[i] = i;
+  for (let i = 255; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [perm[i], perm[j]] = [perm[j], perm[i]];
+  }
+  for (let i = 0; i < 256; i++) perm[256 + i] = perm[i];
+  const fade = t => t * t * t * (t * (t * 6 - 15) + 10);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const grad = (h, x, y) => { const u = h & 3 < 2 ? x : y, v = h & 3 < 2 ? y : x; return ((h & 1) ? -u : u) + ((h & 2) ? -v : v); };
+  function noise(x, y) {
+    const xi = Math.floor(x) & 255, yi = Math.floor(y) & 255;
+    const xf = x - Math.floor(x), yf = y - Math.floor(y);
+    const u = fade(xf), v = fade(yf);
+    const aa = perm[perm[xi] + yi];
+    const ab = perm[perm[xi] + yi + 1];
+    const ba = perm[perm[xi + 1] + yi];
+    const bb = perm[perm[xi + 1] + yi + 1];
+    return lerp(lerp(grad(aa, xf, yf), grad(ba, xf - 1, yf), u),
+                lerp(grad(ab, xf, yf - 1), grad(bb, xf - 1, yf - 1), u), v);
+  }
+
+  class P {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x = rand() * W;
+      this.y = init ? rand() * H : H + 20 + rand() * 80;
+      this.s = .5 + rand() * 1.8;
+      this.sp = .12 + rand() * .35;
+      this.ph = rand() * Math.PI * 2;
+      this.gold = rand() < .15;
+      this.life = 0;
+      this.max = 200 + rand() * 250;
+    }
+    update(t) {
+      const nx = noise(this.x * .003 + t * .25, this.y * .003 + this.ph) * 1.3;
+      const ny = noise(this.x * .003 + this.ph, this.y * .003 + t * .15) * .5;
+      this.x += nx;
+      this.y -= this.sp + ny * .3;
+      this.life++;
+      if (this.y < -20 || this.life > this.max) this.reset(false);
+    }
+    draw(ctx) {
+      const a = Math.min(1, Math.min(this.life / 50, (this.max - this.life) / 50)) * .85;
+      const col = this.gold ? '231,200,98' : '196,222,240';
+      /* outer glow */
+      const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.s * 6);
+      grd.addColorStop(0, `rgba(${col},${a * .4})`);
+      grd.addColorStop(1, `rgba(${col},0)`);
+      ctx.fillStyle = grd;
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.s * 6, 0, Math.PI * 2); ctx.fill();
+      /* core */
+      ctx.fillStyle = `rgba(${col},${a})`;
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
+  function resize() {
+    const r = cvs.getBoundingClientRect();
+    W = r.width; H = r.height;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cvs.width = W * dpr; cvs.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    particles = Array.from({ length: COUNT }, () => new P());
+  }
+
+  let t = 0, raf;
+  function draw() {
+    t += .006;
+    /* background gradient */
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#0d1d40');
+    bg.addColorStop(.5, '#11244d');
+    bg.addColorStop(1, '#0a173a');
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+    /* faint vignette */
+    const vg = ctx.createRadialGradient(W * .7, H * .3, 0, W * .5, H * .5, Math.max(W, H));
+    vg.addColorStop(0, 'rgba(231,200,98,.05)');
+    vg.addColorStop(.6, 'rgba(0,0,0,0)');
+    vg.addColorStop(1, 'rgba(0,0,0,.5)');
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+
+    particles.forEach(p => p.update(t));
+
+    /* connecting lines */
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < LINK) {
+          const a = (1 - d / LINK) * .22;
+          const useGold = particles[i].gold || particles[j].gold;
+          ctx.strokeStyle = useGold ? `rgba(231,200,98,${a})` : `rgba(196,222,240,${a})`;
+          ctx.lineWidth = .55;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => p.draw(ctx));
+    raf = requestAnimationFrame(draw);
+  }
+
+  let resizeT;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(() => { cancelAnimationFrame(raf); resize(); draw(); }, 120);
+  });
+  resize(); draw();
+})();
+
+/* =====================================================
+   Audio player — Fraîche la Peufra · Menthe
+===================================================== */
+(() => {
+  const audio   = document.getElementById('audiotrack');
+  const playBtn = document.getElementById('playbtn');
+  const vinyl   = document.getElementById('vinyl');
+  const wave    = document.getElementById('wavepath');
+  const vol     = document.getElementById('volslider');
+  const tt      = document.getElementById('tracktime');
+
+  if (!audio || !playBtn) return;
+
+  audio.volume = +vol.value;
+  vol.addEventListener('input', e => { audio.volume = +e.target.value; });
+
+  function fmt(s) {
+    if (!isFinite(s)) return '00:00';
+    const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+    return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  }
+  function updateTime() {
+    tt.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)} · La Pie Records`;
+  }
+  audio.addEventListener('loadedmetadata', updateTime);
+  audio.addEventListener('timeupdate', updateTime);
+
+  function setPlaying(on) {
+    playBtn.innerHTML = on ? '⏸' : '▶';
+    playBtn.setAttribute('aria-pressed', on);
+    wave  && wave.classList.toggle('on', on);
+    vinyl && vinyl.classList.toggle('on', on);
+  }
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); } else { audio.pause(); }
+  });
+  audio.addEventListener('play',  () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+})();
+
+/* Legacy synth engine (disabled — kept for reference) */
+const _LegacyBeat = (() => {
+  let ctx, master, reverb, revGain;
+  let isPlaying = false, nextBeat = 0, step = 0, timerID = null;
+  const BPM = 100, STEPS = 16, AHEAD = .1, TICK = 25;
+
+  const kick   = [1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1];
+  const snare  = [0,0,0,0, 1,0,0,1, 0,0,0,0, 1,0,0,0];
+  const hihat  = [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0];
+  const shaker = [0,1,0,1, 0,1,0,1, 0,1,0,1, 0,1,0,1];
+  const conga  = [0,0,1,0, 0,1,0,0, 1,0,0,1, 0,0,1,0];
+  const bass   = [110,0,0,110, 0,130.8,0,0, 146.8,0,0,0, 130.8,0,110,0];
+  const mel    = [440,0,0,0, 0,0,329.6,0, 392,0,0,0, 0,0,493.9,0];
+  const mel2   = [0,0,0,0, 523.3,0,0,0, 0,0,0,0, 659.3,0,0,0];
+
+  function init() {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain();
+    master.gain.value = +document.getElementById('volslider').value;
+    master.connect(ctx.destination);
+    const len = ctx.sampleRate * 1.8, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = buf.getChannelData(c);
+      for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/len, 2.5);
+    }
+    reverb = ctx.createConvolver(); reverb.buffer = buf;
+    revGain = ctx.createGain(); revGain.gain.value = .13;
+    reverb.connect(revGain); revGain.connect(master);
+  }
+  function mkNoise(dur) {
+    const b = ctx.createBuffer(1, ~~(ctx.sampleRate*dur), ctx.sampleRate);
+    const d = b.getChannelData(0);
+    for (let i = 0; i < b.length; i++) d[i] = Math.random()*2-1;
+    const s = ctx.createBufferSource(); s.buffer = b; return s;
+  }
+  function playKick(t) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(.95, t); g.gain.exponentialRampToValueAtTime(.001, t+.4);
+    const o = ctx.createOscillator(); o.frequency.setValueAtTime(160, t); o.frequency.exponentialRampToValueAtTime(35, t+.12);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t+.42);
+  }
+  function playSnare(t, v=.55) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t+.18);
+    const f = ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1400; f.Q.value=.6;
+    const n = mkNoise(.2); n.connect(f); f.connect(g); g.connect(master); g.connect(reverb); n.start(t); n.stop(t+.2);
+  }
+  function playHat(t, v=.28) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t+.08);
+    const f = ctx.createBiquadFilter(); f.type='highpass'; f.frequency.value=10000;
+    const n = mkNoise(.1); n.connect(f); f.connect(g); g.connect(master); n.start(t); n.stop(t+.1);
+  }
+  function playShaker(t) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(.18, t); g.gain.exponentialRampToValueAtTime(.001, t+.06);
+    const f = ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=8000; f.Q.value=1.5;
+    const n = mkNoise(.07); n.connect(f); f.connect(g); g.connect(master); n.start(t); n.stop(t+.08);
+  }
+  function playConga(t) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(.4, t); g.gain.exponentialRampToValueAtTime(.001, t+.15);
+    const o = ctx.createOscillator(); o.frequency.setValueAtTime(300, t); o.frequency.exponentialRampToValueAtTime(220, t+.08);
+    const f = ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=900;
+    o.connect(f); f.connect(g); g.connect(master); g.connect(reverb); o.start(t); o.stop(t+.17);
+  }
+  function playBass(t, freq) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(.55, t); g.gain.exponentialRampToValueAtTime(.001, t+.38);
+    const o = ctx.createOscillator(); o.type='triangle'; o.frequency.value=freq;
+    const f = ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=400;
+    o.connect(f); f.connect(g); g.connect(master); o.start(t); o.stop(t+.4);
+  }
+  function playMel(t, freq, v=.28, dur=.22) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t+dur);
+    const o = ctx.createOscillator(); o.type='sine'; o.frequency.value=freq;
+    o.connect(g); g.connect(master); g.connect(reverb); o.start(t); o.stop(t+dur+.02);
+  }
+
+  function schedule() {
+    const spb = 60 / BPM / 4;
+    while (nextBeat < ctx.currentTime + AHEAD) {
+      if (kick[step])   playKick(nextBeat);
+      if (snare[step])  playSnare(nextBeat, step===7||step===15 ? .32 : .55);
+      if (hihat[step])  playHat(nextBeat);
+      if (shaker[step]) playShaker(nextBeat);
+      if (conga[step])  playConga(nextBeat);
+      if (bass[step])   playBass(nextBeat, bass[step]);
+      if (mel[step])    playMel(nextBeat, mel[step]);
+      if (mel2[step])   playMel(nextBeat, mel2[step], .18, .28);
+      nextBeat += spb;
+      step = (step + 1) % STEPS;
+    }
+    timerID = setTimeout(schedule, TICK);
+  }
+
+  document.getElementById('volslider').addEventListener('input', e => {
+    if (master) master.gain.value = +e.target.value;
+  });
+
+  return {
+    toggle() {
+      if (!ctx) init();
+      if (ctx.state === 'suspended') ctx.resume();
+      const vinyl = document.getElementById('vinyl');
+      if (!isPlaying) {
+        isPlaying = true; nextBeat = ctx.currentTime; step = 0;
+        schedule();
+        document.getElementById('playbtn').innerHTML = '⏸';
+        document.getElementById('wavepath').classList.add('on');
+        vinyl && vinyl.classList.add('on');
+      } else {
+        isPlaying = false; clearTimeout(timerID);
+        document.getElementById('playbtn').innerHTML = '▶';
+        document.getElementById('wavepath').classList.remove('on');
+        vinyl && vinyl.classList.remove('on');
+      }
+    }
+  };
+})();
+/* play button is wired by the audio player IIFE above */
+</script>
+</body>
+</html>
