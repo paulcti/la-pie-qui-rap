@@ -10,3 +10,6 @@ video/out/
 video/.parcel-cache/
 
 .env*.local
+
+.env*
+.env
