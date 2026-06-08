@@ -8,3 +8,5 @@ node_modules/
 video/node_modules/
 video/out/
 video/.parcel-cache/
+
+.env*.local

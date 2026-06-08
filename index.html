@@ -3073,7 +3073,7 @@ function handleLabUpload(e, form, source) {
 
   (async () => {
     try {
-      const { upload } = await import('https://esm.sh/@vercel/blob@0.27.0/client');
+      const { upload } = await import('https://esm.sh/@vercel/blob@2.4.0/client');
       const blob = await upload(blobPath, file, {
         access: 'public',
         handleUploadUrl: '/api/upload-url',

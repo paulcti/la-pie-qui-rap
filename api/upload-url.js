@@ -67,6 +67,9 @@ export default async function handler(req, res) {
 
     return res.status(200).json(jsonResponse);
   } catch (err) {
-    return res.status(400).json({ error: err.message || 'Upload failed' });
+    /* Surface the real error to runtime logs so we can debug from
+       Vercel dashboard or via the MCP get_runtime_logs tool. */
+    console.error('[upload-url] handleUpload failed:', err && err.message, err && err.stack);
+    return res.status(400).json({ error: (err && err.message) || 'Upload failed' });
   }
 }
