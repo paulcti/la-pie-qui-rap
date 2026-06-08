@@ -142,7 +142,7 @@ const CautionTape: React.FC<{ shift: number }> = ({ shift }) => (
         textTransform: 'uppercase',
       }}
     >
-      {'★ ÉDITION LIMITÉE ★ LA PIE QUI RAP × FRAÎCHE LA PEUFRA ★ ÉDITION LIMITÉE ★ LE BONBON DU SON ★ '.repeat(4)}
+      {'★ LA PIE QUI RAP × LA PIE QUI CHANTE ★ ÉDITION LIMITÉE 2026 ★ LE BONBON DU SON ★ '.repeat(4)}
     </div>
   </div>
 );
@@ -297,13 +297,13 @@ export const Packshot: React.FC = () => {
           width: 660,
         }}
       >
-        {/* MENTHE */}
+        {/* LA PIE */}
         <div
           style={{
             fontFamily: FRAUNCES,
             fontVariationSettings: '"opsz" 144',
             fontWeight: 400,
-            fontSize: 138,
+            fontSize: 142,
             color: PAPER,
             lineHeight: 0.88,
             letterSpacing: '-0.04em',
@@ -311,30 +311,31 @@ export const Packshot: React.FC = () => {
             transformOrigin: 'left center',
           }}
         >
-          Menthe
+          La Pie
         </div>
 
-        {/* CLAIRE + scribble underline */}
+        {/* qui rap. + scribble underline */}
         <div style={{ position: 'relative', display: 'inline-block', marginBottom: 6 }}>
           <div
             style={{
               fontFamily: FRAUNCES,
               fontVariationSettings: '"opsz" 144',
               fontWeight: 400,
-              fontSize: 138,
+              fontStyle: 'italic',
+              fontSize: 142,
               color: PAPER,
               lineHeight: 0.88,
               letterSpacing: '-0.04em',
             }}
           >
-            Claire.
+            qui rap.
           </div>
           <div style={{ position: 'absolute', left: -6, bottom: -8 }}>
             <MarkerScribble progress={scribbleProgress} />
           </div>
         </div>
 
-        {/* Off-White-style « × RAP. » */}
+        {/* Off-White-style « × MENTHE. » — the flavor accent */}
         <div
           style={{
             display: 'flex',
@@ -354,11 +355,11 @@ export const Packshot: React.FC = () => {
               textTransform: 'uppercase',
             }}
           >
-            « × RAP. »
+            « × MENTHE. »
           </div>
         </div>
 
-        {/* FEAT. line */}
+        {/* FEAT. line — the heritage brand featured */}
         <div
           style={{
             display: 'inline-flex',
@@ -366,7 +367,7 @@ export const Packshot: React.FC = () => {
             gap: 14,
             padding: '8px 16px',
             border: `1.5px solid ${PAPER}`,
-            opacity: 0.85,
+            opacity: 0.9,
             fontFamily: MONO,
             fontSize: 18,
             letterSpacing: '0.24em',
@@ -376,7 +377,7 @@ export const Packshot: React.FC = () => {
           }}
         >
           <span style={{ color: NEON }}>★</span>
-          Feat. Fraîche la Peufra
+          Feat. La Pie Qui Chante
         </div>
 
         {/* Subtitle quote */}
