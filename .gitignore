@@ -2,5 +2,9 @@ node_modules/
 .DS_Store
 *.log
 .vercel/
-
 .vercel
+
+# Remotion artifacts — videos can be huge, render locally on demand
+video/node_modules/
+video/out/
+video/.parcel-cache/
