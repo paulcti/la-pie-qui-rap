@@ -3004,20 +3004,100 @@ loadSubmissionsFromAPI().then(remote => {
 });
 
 /* =====================================================
-   LE LAB — Boîte à Bonbons upload + Concours
+   LE LAB — Boîte à Bonbons real upload + Concours
+   Uses @vercel/blob/client.upload() loaded dynamically via esm.sh
+   so the file streams DIRECTLY to Blob storage (bypassing the
+   4.5 MB Vercel function body limit).
 ===================================================== */
-function handleLabUpload(e, form, type) {
+const MAX_UPLOAD_BYTES = 25 * 1024 * 1024; // 25 MB
+const ACCEPTED_TYPES = /^audio\/(mpeg|mp3|wav|x-wav|wave)$/i;
+
+function showLabError(form, message) {
+  let err = form.querySelector('.lab-error');
+  if (!err) {
+    err = document.createElement('div');
+    err.className = 'lab-error';
+    err.style.cssText =
+      'color:var(--rouge);font-family:var(--mono);font-size:.68rem;' +
+      'letter-spacing:.1em;text-transform:uppercase;padding-top:.7rem;' +
+      'display:flex;align-items:center;gap:.4rem;font-weight:500';
+    form.appendChild(err);
+  }
+  err.innerHTML = '<span style="font-size:.9rem">⚠</span>' + message;
+}
+
+function clearLabError(form) {
+  const err = form.querySelector('.lab-error');
+  if (err) err.remove();
+}
+
+function handleLabUpload(e, form, source) {
   e.preventDefault();
+  clearLabError(form);
+
+  const fd = new FormData(form);
+  const file = fd.get('audio');
+
+  if (!file || file.size === 0) {
+    showLabError(form, 'Aucun fichier audio sélectionné');
+    return;
+  }
+  if (file.size > MAX_UPLOAD_BYTES) {
+    showLabError(form, `Fichier trop lourd — ${(file.size/1024/1024).toFixed(1)} MB (max 25 MB)`);
+    return;
+  }
+  if (file.type && !ACCEPTED_TYPES.test(file.type)) {
+    showLabError(form, `Format non supporté (${file.type || 'inconnu'}) — MP3 ou WAV uniquement`);
+    return;
+  }
+
   const btn = form.querySelector('.lab-submit');
-  const fields = form.querySelectorAll('input, textarea');
   const dropLabel = form.querySelector('.lab-drop-label');
-  btn.textContent = 'Envoi en cours…';
+  const dropMeta = form.querySelector('.lab-drop-meta');
+  const fields = form.querySelectorAll('input, textarea');
+
+  fields.forEach(f => { f.disabled = true; });
   btn.disabled = true;
-  fields.forEach(f => f.disabled = true);
-  setTimeout(() => {
-    btn.textContent = '✓ Reçu — on t\'écoute';
-    if (dropLabel) dropLabel.textContent = '✓ Maquette envoyée';
-  }, 1100);
+  btn.textContent = 'Préparation…';
+
+  const meta = {
+    source: source || 'boite',
+    artist: (fd.get('artist') || 'anonyme').toString().slice(0, 60),
+    title:  (fd.get('title')  || 'sans titre').toString().slice(0, 80),
+    city:   (fd.get('city')   || '').toString().slice(0, 40),
+    email:  (fd.get('email')  || '').toString().slice(0, 100),
+  };
+
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 80);
+  const blobPath = `maquettes/${Date.now()}-${safeName}`;
+
+  (async () => {
+    try {
+      const { upload } = await import('https://esm.sh/@vercel/blob@0.27.0/client');
+      const blob = await upload(blobPath, file, {
+        access: 'public',
+        handleUploadUrl: '/api/upload-url',
+        clientPayload: JSON.stringify(meta),
+        onUploadProgress: (progress) => {
+          const pct = Math.round((progress && progress.percentage) || 0);
+          btn.textContent = `Envoi ${pct}%`;
+          if (dropLabel) dropLabel.textContent = `Upload ${pct}%`;
+        },
+      });
+      btn.textContent = '✓ Reçu — modération';
+      btn.style.background = 'var(--vert, #2e5d3b)';
+      if (dropLabel) dropLabel.textContent = '✓ Maquette envoyée';
+      if (dropMeta) dropMeta.textContent = "On t'écoute · réponse sous 7 jours";
+      form.querySelector('.lab-drop')?.classList.add('has-file');
+      console.info('[Boîte à Bonbons] upload réussi:', blob.url);
+    } catch (err) {
+      console.error('[Boîte à Bonbons] upload error:', err);
+      fields.forEach(f => { f.disabled = false; });
+      btn.disabled = false;
+      btn.textContent = 'Réessayer →';
+      showLabError(form, (err && err.message) || 'Erreur réseau, réessaie');
+    }
+  })();
 }
 
 function handleLabFileSelect(e, input) {
@@ -3030,11 +3110,13 @@ function handleLabFileSelect(e, input) {
   label.textContent = file.name.length > 28 ? file.name.slice(0, 25) + '…' : file.name;
   if (meta) meta.textContent = `${size} MB · prêt à envoyer`;
   drop.classList.add('has-file');
+  /* Clear any prior error when the user picks a new file */
+  const form = drop.closest('form');
+  if (form) clearLabError(form);
 }
 
 function handleSamplePackDownload(e, btn) {
   e.preventDefault();
-  const original = btn.innerHTML;
   btn.innerHTML = '⏳ Pack en préparation · Q3 2026';
   btn.style.pointerEvents = 'none';
   setTimeout(() => {
