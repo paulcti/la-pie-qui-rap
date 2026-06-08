@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Pie Qui Rap — Menthe Glacée, Édition Printemps 2026</title>
-  <meta name="description" content="La Pie Qui Chante avait un siècle. On lui a mis un micro. Sachet collector menthe glacée — Édition Printemps 2026.">
-  <meta property="og:title" content="La Pie Qui Rap">
-  <meta property="og:description" content="La Pie Qui Chante avait un siècle. On lui a mis un micro.">
+  <title>La Pie Qui Rap — Menthe Claire, Édition Limitée 2026 par La Pie Qui Chante</title>
+  <meta name="description" content="« Le bonbon glaçon » devient « le bonbon du son ». La Pie Qui Chante avait un siècle. On lui a mis un micro. Édition limitée Menthe Claire — Printemps 2026.">
+  <meta property="og:title" content="La Pie Qui Rap — Le bonbon du son">
+  <meta property="og:description" content="La Pie Qui Chante avait un siècle. On lui a mis un micro. Édition limitée Menthe Claire × Fraîche la Peufra.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <link rel="canonical" href="https://lapiequirap.fr/">
@@ -29,9 +29,9 @@
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "La Pie Qui Rap — Sachet Menthe Glacée Édition Limitée",
+    "name": "La Pie Qui Rap — Sachet Menthe Claire Édition Limitée 2026",
     "brand": { "@type": "Brand", "name": "La Pie Qui Chante" },
-    "description": "Sachet 150g bonbons menthe glacée, packaging collector Printemps 2026.",
+    "description": "Sachet collector 124g bonbons Menthe Claire — édition limitée La Pie Qui Rap Printemps 2026.",
     "offers": { "@type": "Offer", "price": "1.90", "priceCurrency": "EUR" }
   }
   </script>
@@ -318,27 +318,12 @@
       to { opacity: 1; transform: none; }
     }
 
+    /* Real product packshot — no duotone, just drop-shadow for depth */
     .pack-photo {
       position: relative; width: 100%; height: 100%;
-      background-size: cover; background-position: center;
-      background-color: var(--bleu-nuit);
-      border-radius: 6px; overflow: hidden;
-      filter: contrast(1.1) saturate(.82) brightness(.94);
-      box-shadow:
-        0 30px 60px rgba(0,0,0,.5),
-        0 10px 20px rgba(0,0,0,.3),
-        inset 0 0 0 1px rgba(255,255,255,.06);
-    }
-    .pack-photo::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 65% 45% at 70% 15%, rgba(243,224,0,.25) 0%, transparent 55%),
-        linear-gradient(195deg, transparent 0%, transparent 40%, rgba(17,36,77,.65) 100%);
-    }
-    .pack-photo::after {
-      content: ''; position: absolute; inset: 0;
-      opacity: .12; mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: contain; background-repeat: no-repeat; background-position: center;
+      filter: drop-shadow(0 30px 40px rgba(0,0,0,.45))
+              drop-shadow(0 8px 16px rgba(0,0,0,.25));
     }
 
     /* Floating label band */
@@ -1111,6 +1096,16 @@
       filter: contrast(1.05) saturate(1) brightness(1);
     }
 
+    /* Packshot variant — real product photo on transparent/cream bg, no duotone */
+    .product-img-packshot {
+      background-size: contain !important;
+      background-repeat: no-repeat;
+      filter: none;
+    }
+    .product-img-packshot::before { display: none; }
+    .product-img-packshot::after { display: none; }
+    .product:hover .product-img-packshot { filter: none; transform: scale(1.03); }
+
     /* Brand seal overlaid on each product photo */
     .brand-seal {
       position: absolute; bottom: 14px; right: 14px;
@@ -1626,13 +1621,7 @@
 
     <div class="hero-visual">
       <div class="pack-3d">
-        <div class="pack-photo" style="background-image:url('https://images.unsplash.com/photo-1774569037132-cdf039aaafb3?auto=format&fit=crop&w=900&q=85')"></div>
-
-        <div class="pack-band">
-          <span class="pack-band-top">La Pie</span>
-          <span class="pack-band-mid">qui rap.</span>
-          <span class="pack-band-bot">Menthe glacée · 150g</span>
-        </div>
+        <div class="pack-photo" style="background-image:url('assets/menthe-claire-hires.webp')" role="img" aria-label="Sachet La Pie Qui Chante Menthe Claire — visuel officiel"></div>
 
         <div class="pack-stamp">
           <div class="stamp-rotate">
@@ -1640,15 +1629,16 @@
               <defs>
                 <path id="circlePath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
               </defs>
-              <text font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2" fill="#16140f">
-                <textPath href="#circlePath">MADE IN FRANCE · 100% FRAIS · MADE IN FRANCE · 100% FRAIS · </textPath>
+              <text font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1.8" fill="#16140f">
+                <textPath href="#circlePath">ÉDITION LIMITÉE · LA PIE QUI RAP · 2026 · ÉDITION LIMITÉE · </textPath>
               </text>
             </svg>
           </div>
-          <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1;text-align:center">
+          <div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center">
             <div>
-              <div style="font-family:var(--mono);font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-bottom:.15rem">Édition</div>
-              <div style="font-variation-settings:'opsz' 144;font-weight:500">2026</div>
+              <div style="font-family:var(--mono);font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-bottom:.15rem">N°</div>
+              <div style="font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1;font-variation-settings:'opsz' 144;font-weight:500">01</div>
+              <div style="font-family:var(--mono);font-size:.4rem;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-top:.15rem">10 000</div>
             </div>
           </div>
         </div>
@@ -1680,15 +1670,15 @@
   <div class="tape-track">
     <span class="tape-item">Le refrain d'un plaisir glacé</span><span class="tape-item tape-dot">✦</span>
     <span class="tape-item">La Pie a grandi. Elle rappe.</span><span class="tape-item tape-dot">✦</span>
-    <span class="tape-item">Le bonbon du son</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">« Le bonbon glaçon » → « le bonbon du son »</span><span class="tape-item tape-dot">✦</span>
     <span class="tape-item">Made in France · 100% frais</span><span class="tape-item tape-dot">✦</span>
-    <span class="tape-item">Menthe glacée · Édition 2026</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Menthe Claire · Édition 2026</span><span class="tape-item tape-dot">✦</span>
     <span class="tape-item">Depuis 1921 · cent ans de menthe</span><span class="tape-item tape-dot">✦</span>
     <span class="tape-item">Le refrain d'un plaisir glacé</span><span class="tape-item tape-dot">✦</span>
     <span class="tape-item">La Pie a grandi. Elle rappe.</span><span class="tape-item tape-dot">✦</span>
-    <span class="tape-item">Le bonbon du son</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">« Le bonbon glaçon » → « le bonbon du son »</span><span class="tape-item tape-dot">✦</span>
     <span class="tape-item">Made in France · 100% frais</span><span class="tape-item tape-dot">✦</span>
-    <span class="tape-item">Menthe glacée · Édition 2026</span><span class="tape-item tape-dot">✦</span>
+    <span class="tape-item">Menthe Claire · Édition 2026</span><span class="tape-item tape-dot">✦</span>
     <span class="tape-item">Depuis 1921 · cent ans de menthe</span><span class="tape-item tape-dot">✦</span>
   </div>
 </div>
@@ -1700,7 +1690,7 @@
       <span class="eyebrow r">Notre histoire</span>
       <h2 class="story-title r d1">La Pie a grandi.<br><em>Elle <span class="mark mark-red">rappe.</span></em></h2>
       <div class="story-body">
-        <p class="r d2">En 1921, La Pie Qui Chante invente un bonbon menthe qui marque toute une génération. Un siècle plus tard, la confiserie décide de ne pas fêter ça sagement avec un gâteau d'anniversaire.</p>
+        <p class="r d2">En 1921, La Pie Qui Chante invente la <strong>Menthe Claire</strong> — « le bonbon glaçon ». Un siècle plus tard, on en fait <strong>« le bonbon du son »</strong>. Le sachet ne change pas. C'est ce qu'on met dedans qui change.</p>
         <p class="r d2">La Pie Qui Rap est une édition limitée née de la rencontre entre un patrimoine confiseur français et une culture musicale qui partage la même exigence : faire quelque chose de propre, avec peu de moyens, pour beaucoup de gens.</p>
         <p class="r d2">Même recette d'origine. Packaging repensé. Distribution en GMS et en ligne. Une partie des bénéfices finance des résidences artistiques en France.</p>
         <div class="pillars r d3">
@@ -1714,7 +1704,7 @@
     </div>
 
     <div class="story-right">
-      <div class="story-photo r d1" style="background-image:url('https://images.unsplash.com/photo-1768213049230-7d4bcea01b9e?auto=format&fit=crop&w=900&q=80')"></div>
+      <div class="story-photo r d1" style="background-image:url('assets/menthe-claire-100g.webp'); background-size: contain; background-color: #ebe5d6; background-repeat: no-repeat;" role="img" aria-label="Sachet Menthe Claire 100g — La Pie Qui Chante"></div>
       <div class="quote-card r d2">
         <p class="quote-text">"La Pie Qui Chante avait un siècle. On lui a mis un micro, et on lui a demandé ce qu'elle avait à dire."</p>
         <div class="quote-attr">
@@ -1889,7 +1879,7 @@
         <h3 class="radio-title">La Pie <em>Sessions.</em></h3>
         <p class="radio-desc">
           Format radio long, freestyles bruts, plusieurs artistes par épisode — l'idée qu'on aime
-          chez <b>Grünt</b>, déclinée à notre sauce menthe glacée. Premier épisode tourné en studio
+          chez <b>Grünt</b>, déclinée à notre sauce menthe claire. Premier épisode tourné en studio
           mobile avec les six artistes du label, captation 6 caméras, mix live.
           À écouter dès la rentrée 2026 sur le site et toutes les plateformes audio.
         </p>
@@ -2009,7 +1999,7 @@
       <span class="sticker sticker-red" style="top:-14px;left:-12px">
         Best<em>seller</em>
       </span>
-      <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1765174639852-73f77b49e3c6?auto=format&fit=crop&w=900&q=80')">
+      <div class="product-img product-img-packshot" style="background-image:url('assets/menthe-claire-sachet.jpg'); background-color: #ebe5d6;" role="img" aria-label="Sachet Menthe Claire — édition collector La Pie Qui Rap">
         <span class="product-tag tag-new">Nouveau</span>
         <div class="brand-seal">
           <span class="seal-top">Édition</span>
@@ -2017,8 +2007,8 @@
         </div>
       </div>
       <div class="product-body">
-        <span class="product-cat">Confiserie · Sachet 150g</span>
-        <h3 class="product-name">Menthe Glacée — <em>Collector</em></h3>
+        <span class="product-cat">Confiserie · Menthe Claire · 124g</span>
+        <h3 class="product-name">Menthe Claire — <em>Édition Rap</em></h3>
         <p class="product-desc">La recette originale de 1921. Sachet illustré par un artiste sélectionné. Tirage 10 000 ex.</p>
         <div class="product-meta">
           <span class="product-price">1,90 €</span>
@@ -2117,7 +2107,7 @@
       <div class="product-body">
         <span class="product-cat">Pack · L'Essentiel Pie Qui Rap</span>
         <h3 class="product-name">L'Essentiel — <em>Pack 4 pièces</em></h3>
-        <p class="product-desc">Le sachet collector menthe glacée 150g + la boîte métal 500g + le tote bag + le pack stickers. Tout dans un emballage recyclé, livraison offerte en France métro.</p>
+        <p class="product-desc">Le sachet collector Menthe Claire 124g + la boîte métal 500g + le tote bag + le pack stickers. Tout dans un emballage recyclé, livraison offerte en France métro.</p>
         <div class="product-meta">
           <span class="product-price"><s>46,00 €</s>38,00 €</span>
           <button class="product-add" onclick="addToCart(this)">Tout prendre</button>
