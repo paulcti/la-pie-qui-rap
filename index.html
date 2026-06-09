@@ -769,70 +769,131 @@
       transition: background .3s;
       position: relative;
       min-height: 280px;
-      overflow: hidden;
     }
     .artist:hover { background: #1c1a14; }
 
-    /* Embedded intro video — featured plays always, others on hover */
-    .artist-video {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .55s var(--ease);
-      z-index: 0;
+    /* "Voir l'intro" CTA at the bottom of each artist card */
+    .artist-cta {
+      align-self: flex-start;
+      display: inline-flex; align-items: center; gap: .65rem;
+      padding: .55rem 1rem .55rem .65rem;
+      margin-top: .3rem;
+      background: transparent;
+      border: 1px solid rgba(244,239,228,.22);
+      border-radius: 999px;
+      color: var(--paper);
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      cursor: pointer;
+      transition: all .25s var(--ease);
     }
-    /* Dark scrim for text legibility over the video */
-    .artist::after {
-      content: '';
-      position: absolute; inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: linear-gradient(180deg,
-        rgba(14,13,9,.45) 0%,
-        rgba(14,13,9,.75) 55%,
-        rgba(14,13,9,.95) 100%);
-      opacity: 0;
-      transition: opacity .55s var(--ease);
+    .artist-cta::before {
+      content: '▶';
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--neon);
+      color: var(--ink);
+      display: grid; place-items: center;
+      font-size: .55rem;
+      transition: transform .25s var(--ease);
     }
-    /* Stack the textual content above the video + scrim */
-    .artist > *:not(.artist-video) {
+    .artist-cta:hover {
+      border-color: var(--neon);
+      color: var(--neon);
+      background: rgba(243,224,0,.05);
+    }
+    .artist-cta:hover::before { transform: scale(1.08); }
+    .artist-cta:active { transform: scale(.97); }
+
+    .artist.featured .artist-cta {
+      background: var(--neon); color: var(--ink); border-color: var(--neon);
+    }
+    .artist.featured .artist-cta::before {
+      background: var(--ink); color: var(--neon);
+    }
+    .artist.featured .artist-cta:hover {
+      background: var(--paper); border-color: var(--paper); color: var(--ink);
+    }
+
+    /* ─── Video modal ─────────────────────────── */
+    .video-modal {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(7, 12, 28, 0);
+      backdrop-filter: blur(0);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      transition: background .35s var(--ease), backdrop-filter .35s var(--ease);
+    }
+    .video-modal.open {
+      display: flex;
+      background: rgba(7, 12, 28, .85);
+      backdrop-filter: blur(8px);
+    }
+
+    .video-modal-card {
       position: relative;
-      z-index: 2;
+      max-width: 100%;
+      max-height: 100%;
+      aspect-ratio: 9 / 16;
+      width: auto;
+      height: min(92vh, 90vw * 16 / 9);
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      transform: scale(.94);
+      opacity: 0;
+      transition: transform .35s var(--ease), opacity .35s var(--ease);
     }
-    /* Featured: always playing */
-    .artist.featured .artist-video,
-    .artist.featured::after {
+    .video-modal.open .video-modal-card {
+      transform: scale(1);
       opacity: 1;
     }
-    /* Other cards: hover reveals video on desktop */
-    @media (hover: hover) and (pointer: fine) {
-      .artist:not(.featured):hover .artist-video,
-      .artist:not(.featured):hover::after {
-        opacity: 1;
-      }
+    .video-modal-card video {
+      width: 100%; height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #000;
     }
-    /* Small video indicator on the non-featured cards */
-    .video-hint {
-      position: absolute;
-      top: 16px; right: 16px;
-      width: 30px; height: 30px;
+
+    .video-modal-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: rgba(244,239,228,.1);
-      border: 1px solid rgba(244,239,228,.18);
+      background: rgba(244,239,228,.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(244,239,228,.2);
       color: var(--paper);
+      font-size: 1.1rem;
       display: grid; place-items: center;
-      font-size: .58rem;
-      z-index: 3;
-      opacity: .65;
-      transition: opacity .3s var(--ease), background .3s, transform .3s var(--ease);
+      cursor: pointer;
+      z-index: 2;
+      transition: background .2s, transform .2s var(--ease);
     }
-    .artist:not(.featured):hover .video-hint {
-      opacity: 0;
-      transform: scale(.85);
+    .video-modal-close:hover {
+      background: rgba(244,239,228,.22);
     }
-    .artist.featured .video-hint { display: none; }
+    .video-modal-close:active { transform: scale(.94); }
+
+    .video-modal-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1rem 1.2rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.7) 100%);
+      color: var(--paper);
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      pointer-events: none;
+    }
+    .video-modal-caption strong {
+      display: block;
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.1rem; color: var(--neon);
+      font-variation-settings: 'opsz' 144;
+      letter-spacing: -.01em; text-transform: none;
+      margin-top: .25rem;
+    }
     .artist.featured {
       grid-column: span 1;
       background:
@@ -2060,6 +2121,15 @@
 </head>
 <body>
 
+<!-- ═══ VIDEO MODAL ══════════════════════ -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Lecteur vidéo" aria-hidden="true">
+  <div class="video-modal-card">
+    <button class="video-modal-close" id="videoModalClose" type="button" aria-label="Fermer">✕</button>
+    <video id="videoModalPlayer" controls playsinline preload="none"></video>
+    <div class="video-modal-caption" id="videoModalCaption" aria-hidden="true"></div>
+  </div>
+</div>
+
 <a href="#hero" id="btt" aria-label="Retour en haut">
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 13V1M1 7L7 1L13 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
 </a>
@@ -2303,8 +2373,6 @@
 
   <div class="roster">
     <article class="artist featured r" style="position:relative">
-      <video class="artist-video" autoplay muted loop playsinline preload="metadata"
-             src="/assets/video/intro-fraiche.mp4" aria-hidden="true"></video>
       <span class="sticker sticker-r" style="top:18px;right:18px">
         Coup de cœur<em>du label</em>
       </span>
@@ -2321,12 +2389,15 @@
         <span>·</span>
         <span>4 singles</span>
       </div>
+      <button class="artist-cta" type="button"
+              data-video="/assets/video/intro-fraiche.mp4"
+              data-artist="Fraîche la Peufra"
+              data-tag="N°01 · Roster La Pie Records">
+        Voir l'intro
+      </button>
     </article>
 
     <article class="artist r d1">
-      <video class="artist-video" muted loop playsinline preload="metadata"
-             src="/assets/video/intro-koba.mp4" aria-hidden="true"></video>
-      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°02</span>
         <span>Évry</span>
@@ -2334,12 +2405,13 @@
       <h3 class="artist-name">Koba<em>la Fraîche.</em></h3>
       <p class="artist-line">"Drill froide, kicks lourds, le flow qui s'adapte au tempo."</p>
       <div class="artist-meta"><span>Drill / Trap</span><span>·</span><span>3 freestyles</span></div>
+      <button class="artist-cta" type="button"
+              data-video="/assets/video/intro-koba.mp4"
+              data-artist="Koba la Fraîche"
+              data-tag="N°02 · Roster">Voir l'intro</button>
     </article>
 
     <article class="artist r d2">
-      <video class="artist-video" muted loop playsinline preload="metadata"
-             src="/assets/video/intro-frinho.mp4" aria-hidden="true"></video>
-      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°03</span>
         <span>Boulogne</span>
@@ -2347,12 +2419,13 @@
       <h3 class="artist-name">Frinho<em>.</em></h3>
       <p class="artist-line">"Mélodies pour l'été qui dure. Spotify l'aime déjà."</p>
       <div class="artist-meta"><span>Mélodique / Cloud</span><span>·</span><span>2 EP</span></div>
+      <button class="artist-cta" type="button"
+              data-video="/assets/video/intro-frinho.mp4"
+              data-artist="Frinho"
+              data-tag="N°03 · Roster">Voir l'intro</button>
     </article>
 
     <article class="artist r">
-      <video class="artist-video" muted loop playsinline preload="metadata"
-             src="/assets/video/intro-bouba.mp4" aria-hidden="true"></video>
-      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°04</span>
         <span>Boulogne-Bnt</span>
@@ -2360,12 +2433,13 @@
       <h3 class="artist-name">Bouba<em>Vanille.</em></h3>
       <p class="artist-line">"Vétéran. Toujours le même flow, jamais le même goût."</p>
       <div class="artist-meta"><span>Rap classique</span><span>·</span><span>1 album studio</span></div>
+      <button class="artist-cta" type="button"
+              data-video="/assets/video/intro-bouba.mp4"
+              data-artist="Bouba Vanille"
+              data-tag="N°04 · Roster">Voir l'intro</button>
     </article>
 
     <article class="artist r d1">
-      <video class="artist-video" muted loop playsinline preload="metadata"
-             src="/assets/video/intro-glaco.mp4" aria-hidden="true"></video>
-      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°05</span>
         <span>Lyon</span>
@@ -2373,12 +2447,13 @@
       <h3 class="artist-name">Glaço<em>.</em></h3>
       <p class="artist-line">"Punchlines qui mordent, ego trip qui dure 3 minutes."</p>
       <div class="artist-meta"><span>Egotrip / Punchline</span><span>·</span><span>1 mixtape</span></div>
+      <button class="artist-cta" type="button"
+              data-video="/assets/video/intro-glaco.mp4"
+              data-artist="Glaço"
+              data-tag="N°05 · Roster">Voir l'intro</button>
     </article>
 
     <article class="artist r d2">
-      <video class="artist-video" muted loop playsinline preload="metadata"
-             src="/assets/video/intro-dj-vanille.mp4" aria-hidden="true"></video>
-      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°06</span>
         <span>Paris</span>
@@ -2386,6 +2461,10 @@
       <h3 class="artist-name">DJ Vanille<em>Ice.</em></h3>
       <p class="artist-line">"Aux platines, aux beats, aux samples. La signature sonore du label."</p>
       <div class="artist-meta"><span>DJ / Producteur</span><span>·</span><span>Beatmaker maison</span></div>
+      <button class="artist-cta" type="button"
+              data-video="/assets/video/intro-dj-vanille.mp4"
+              data-artist="DJ Vanille Ice"
+              data-tag="N°06 · Roster">Voir l'intro</button>
     </article>
   </div>
 
@@ -3204,28 +3283,47 @@ function handleSamplePackDownload(e, btn) {
 }
 
 /* =====================================================
-   ROSTER — hover-to-play artist intros (non-featured cards)
-   Featured card autoplays via <video autoplay> attribute.
+   ROSTER — click-to-play artist intros in a modal
 ===================================================== */
-document.querySelectorAll('.artist:not(.featured)').forEach(card => {
-  const video = card.querySelector('.artist-video');
-  if (!video) return;
-  let leaveTimer = null;
+(() => {
+  const modal = document.getElementById('videoModal');
+  const player = document.getElementById('videoModalPlayer');
+  const closeBtn = document.getElementById('videoModalClose');
+  const caption = document.getElementById('videoModalCaption');
+  if (!modal || !player) return;
 
-  card.addEventListener('mouseenter', () => {
-    clearTimeout(leaveTimer);
-    /* Skip the 2s cold open + number reveal — go straight to the name */
-    if (video.currentTime < 1.8 || video.currentTime > 7.5) {
-      video.currentTime = 1.8;
+  function open(src, artist, tag) {
+    player.src = src;
+    if (caption) {
+      caption.innerHTML = (tag ? `${tag}` : '') + (artist ? `<strong>${artist}</strong>` : '');
     }
-    video.play().catch(() => {});
-  });
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    /* Defer play so the transition can start */
+    requestAnimationFrame(() => player.play().catch(() => {}));
+  }
+  function close() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    player.pause();
+    /* Clear src after the close transition so the player isn't left
+       buffering in the background */
+    setTimeout(() => { player.removeAttribute('src'); player.load(); }, 350);
+    document.body.style.overflow = '';
+  }
 
-  card.addEventListener('mouseleave', () => {
-    /* Tiny delay to avoid stutter when crossing card borders */
-    leaveTimer = setTimeout(() => video.pause(), 80);
+  document.querySelectorAll('.artist-cta').forEach(btn => {
+    btn.addEventListener('click', () => {
+      open(btn.dataset.video, btn.dataset.artist, btn.dataset.tag);
+    });
   });
-});
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) close();
+  });
+})();
 
 /* Cursor-follow spotlight on tier cards */
 document.querySelectorAll('.tier').forEach(card => {
