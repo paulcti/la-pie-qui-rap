@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>La Pie Records — Modération</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316140f'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23f3e000'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #16140f;
+      --paper: #f4efe4;
+      --paper-2: #ebe5d6;
+      --bleu-nuit: #11244d;
+      --bleu: #1f3b8b;
+      --neon: #f3e000;
+      --rouge: #c93838;
+      --vert: #2e5d3b;
+      --glace: #c4def0;
+      --serif: 'Fraunces', serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--ink); color: var(--paper);
+      font-family: var(--mono);
+      min-height: 100vh; padding: 2rem 1.5rem;
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 1.5rem; margin-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(244,239,228,.1);
+    }
+    .brand {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.5rem; color: var(--neon);
+      font-variation-settings: 'opsz' 144;
+    }
+    .brand small {
+      display: block; font-family: var(--mono); font-size: .58rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(244,239,228,.5); margin-top: .25rem;
+      font-style: normal;
+    }
+    .logout {
+      font-family: var(--mono); font-size: .6rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      padding: .5rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(244,239,228,.2);
+      background: transparent; color: var(--paper);
+      cursor: pointer; transition: all .2s var(--ease);
+    }
+    .logout:hover { border-color: var(--rouge); color: var(--rouge); }
+    .logout:active { transform: scale(.97); }
+
+    /* Auth gate */
+    #auth-gate {
+      max-width: 460px; margin: 8vh auto 0;
+      padding: 2.5rem 2.2rem;
+      background: rgba(244,239,228,.04);
+      border: 1px solid rgba(244,239,228,.08);
+      border-radius: 8px;
+      text-align: center;
+    }
+    #auth-gate h1 {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 2.2rem; color: var(--paper); line-height: 1;
+      letter-spacing: -.02em; margin-bottom: .6rem;
+      font-variation-settings: 'opsz' 144;
+    }
+    #auth-gate p {
+      font-family: var(--mono); font-size: .68rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(244,239,228,.5); margin-bottom: 2rem;
+    }
+    #token-input {
+      width: 100%; padding: .85rem 1rem;
+      background: var(--paper);
+      border: 1.5px solid transparent;
+      border-radius: 6px;
+      color: var(--ink); font-family: var(--mono);
+      font-size: .85rem; outline: none;
+      margin-bottom: .9rem;
+      transition: border-color .2s;
+    }
+    #token-input:focus { border-color: var(--neon); }
+    #token-input::placeholder { color: rgba(22,20,15,.4); }
+    .btn-primary {
+      width: 100%; padding: .95rem 1.4rem;
+      background: var(--neon); color: var(--ink);
+      border: none; border-radius: 999px;
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      font-weight: 600; cursor: pointer;
+      transition: transform .15s, box-shadow .25s;
+    }
+    .btn-primary:hover { box-shadow: 0 10px 24px rgba(243,224,0,.28); }
+    .btn-primary:active { transform: scale(.97); }
+    #auth-error {
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--rouge); margin-top: 1rem; min-height: 1em;
+    }
+
+    /* Dashboard */
+    #dashboard { display: none; }
+    #dashboard.show { display: block; }
+
+    .stats {
+      display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .stat {
+      flex: 1; min-width: 180px;
+      padding: 1.2rem 1.4rem;
+      background: rgba(244,239,228,.04);
+      border: 1px solid rgba(244,239,228,.08);
+      border-radius: 6px;
+    }
+    .stat-n {
+      font-family: var(--serif); font-weight: 400;
+      font-size: 2.4rem; color: var(--neon); line-height: 1;
+      font-variation-settings: 'opsz' 144;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-l {
+      font-family: var(--mono); font-size: .58rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: rgba(244,239,228,.55); margin-top: .4rem;
+    }
+
+    .section-title {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.6rem; letter-spacing: -.01em;
+      margin: 2rem 0 1rem;
+      font-variation-settings: 'opsz' 144;
+    }
+
+    /* Submission cards */
+    .submission {
+      background: rgba(244,239,228,.04);
+      border: 1px solid rgba(244,239,228,.08);
+      border-radius: 6px;
+      padding: 1.5rem 1.6rem;
+      margin-bottom: 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      transition: border-color .2s;
+    }
+    .submission:hover { border-color: rgba(244,239,228,.16); }
+    .submission.removing {
+      opacity: 0; transform: scale(.97);
+      transition: opacity .3s var(--ease), transform .3s var(--ease);
+    }
+
+    @media (min-width: 768px) {
+      .submission {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+    }
+
+    .sub-info { min-width: 0; }
+    .sub-meta {
+      display: flex; align-items: center; gap: .8rem;
+      font-family: var(--mono); font-size: .55rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(244,239,228,.45); margin-bottom: .55rem;
+      flex-wrap: wrap;
+    }
+    .sub-source {
+      padding: .2rem .55rem;
+      background: rgba(243,224,0,.12);
+      color: var(--neon);
+      border-radius: 999px;
+      font-size: .52rem;
+    }
+    .sub-source.concours { background: rgba(201,56,56,.18); color: #f08585; }
+
+    .sub-track {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.4rem; color: var(--paper); line-height: 1.1;
+      letter-spacing: -.01em; margin-bottom: .35rem;
+      font-variation-settings: 'opsz' 144;
+    }
+    .sub-artist {
+      font-family: var(--mono); font-size: .68rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(244,239,228,.75);
+      margin-bottom: .9rem;
+    }
+    .sub-audio {
+      width: 100%; max-width: 460px;
+      height: 40px; outline: none;
+    }
+    .sub-audio::-webkit-media-controls-panel {
+      background: rgba(244,239,228,.06);
+    }
+
+    .sub-actions {
+      display: flex; gap: .55rem;
+      flex-shrink: 0;
+    }
+    .btn-approve, .btn-reject {
+      font-family: var(--mono); font-size: .62rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      font-weight: 600;
+      padding: .75rem 1.2rem;
+      border-radius: 999px;
+      border: none; cursor: pointer;
+      transition: transform .15s, opacity .2s;
+    }
+    .btn-approve {
+      background: var(--vert); color: var(--paper);
+    }
+    .btn-reject {
+      background: transparent; color: var(--paper);
+      border: 1px solid rgba(244,239,228,.2);
+    }
+    .btn-approve:hover { transform: translateY(-2px); }
+    .btn-reject:hover { background: var(--rouge); border-color: var(--rouge); }
+    .btn-approve:active, .btn-reject:active { transform: scale(.97); }
+    .btn-approve:disabled, .btn-reject:disabled { opacity: .4; cursor: default; }
+
+    .empty {
+      text-align: center; padding: 4rem 2rem;
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.4rem; color: rgba(244,239,228,.5);
+      font-variation-settings: 'opsz' 144;
+    }
+    .empty small {
+      display: block; font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: rgba(244,239,228,.4); margin-top: 1rem;
+      font-style: normal;
+    }
+
+    #toast {
+      position: fixed; bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--paper); color: var(--ink);
+      padding: .8rem 1.4rem; border-radius: 999px;
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+      z-index: 100;
+    }
+    #toast.show {
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+    #toast.error { background: var(--rouge); color: var(--paper); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Authentication gate -->
+    <section id="auth-gate">
+      <h1>Modération</h1>
+      <p>La Pie Records · admin</p>
+      <form id="auth-form" onsubmit="return tryAuth(event)">
+        <input id="token-input" type="password" placeholder="Token admin" autocomplete="off" required>
+        <button type="submit" class="btn-primary">Entrer →</button>
+      </form>
+      <p id="auth-error"></p>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard">
+      <header>
+        <div class="brand">
+          La Pie Records<small>Modération · file d'attente</small>
+        </div>
+        <button class="logout" onclick="logout()">Déconnexion</button>
+      </header>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-n" id="stat-pending">—</div>
+          <div class="stat-l">En attente</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n" id="stat-today">—</div>
+          <div class="stat-l">Reçues aujourd'hui</div>
+        </div>
+      </div>
+
+      <div class="section-title" id="list-title">Soumissions en attente</div>
+      <div id="list"></div>
+    </section>
+  </div>
+
+  <div id="toast"></div>
+
+<script>
+const TOKEN_KEY = 'lpr-admin-token';
+
+function showToast(message, type) {
+  const t = document.getElementById('toast');
+  t.textContent = message;
+  t.className = type === 'error' ? 'show error' : 'show';
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove('show', 'error'), 2400);
+}
+
+async function tryAuth(e) {
+  if (e) e.preventDefault();
+  const input = document.getElementById('token-input');
+  const err = document.getElementById('auth-error');
+  const token = input.value.trim();
+  if (!token) return;
+  err.textContent = '';
+  try {
+    const r = await fetch('/api/admin/pending', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.status === 401) {
+      err.textContent = '⚠ Token invalide';
+      input.select();
+      return;
+    }
+    if (!r.ok) {
+      err.textContent = '⚠ Erreur ' + r.status;
+      return;
+    }
+    const data = await r.json();
+    localStorage.setItem(TOKEN_KEY, token);
+    showDashboard(data);
+  } catch (e) {
+    err.textContent = '⚠ Erreur réseau';
+  }
+}
+
+function logout() {
+  localStorage.removeItem(TOKEN_KEY);
+  document.getElementById('auth-gate').style.display = '';
+  document.getElementById('dashboard').classList.remove('show');
+  document.getElementById('token-input').value = '';
+}
+
+function getToken() { return localStorage.getItem(TOKEN_KEY); }
+
+function showDashboard(data) {
+  document.getElementById('auth-gate').style.display = 'none';
+  document.getElementById('dashboard').classList.add('show');
+  renderList(data);
+}
+
+function renderList(data) {
+  const list = document.getElementById('list');
+  const subs = data.submissions || [];
+  const today = new Date().toISOString().slice(0, 10);
+  const todayCount = subs.filter(s => (s.date || '').slice(0, 10) === today).length;
+
+  document.getElementById('stat-pending').textContent = subs.length;
+  document.getElementById('stat-today').textContent = todayCount;
+
+  if (subs.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        Le nid est calme.
+        <small>Aucune maquette à modérer.</small>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = subs.map(s => `
+    <article class="submission" data-id="${s.id}">
+      <div class="sub-info">
+        <div class="sub-meta">
+          <span class="sub-source ${s.source}">${s.source === 'concours' ? 'Pie Voleuse' : 'Boîte'}</span>
+          <span>${s.city || '—'}</span>
+          <span>${fmtDate(s.date)}</span>
+        </div>
+        <div class="sub-track">${escape(s.track)}</div>
+        <div class="sub-artist">${escape(s.artist)}</div>
+        <audio controls preload="none" class="sub-audio" src="${s.audioUrl}"></audio>
+      </div>
+      <div class="sub-actions">
+        <button class="btn-reject" onclick="moderate('${s.id}', 'reject', this)">Rejeter</button>
+        <button class="btn-approve" onclick="moderate('${s.id}', 'approve', this)">Approuver →</button>
+      </div>
+    </article>
+  `).join('');
+}
+
+function escape(s) {
+  return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  const now = Date.now();
+  const diffH = (now - d.getTime()) / 3_600_000;
+  if (diffH < 1) return `il y a ${Math.max(1, Math.floor(diffH * 60))} min`;
+  if (diffH < 24) return `il y a ${Math.floor(diffH)} h`;
+  const diffD = Math.floor(diffH / 24);
+  return `il y a ${diffD} j`;
+}
+
+async function moderate(id, action, btn) {
+  const token = getToken();
+  if (!token) { logout(); return; }
+  const card = btn.closest('.submission');
+  const actions = card.querySelectorAll('button');
+  actions.forEach(b => b.disabled = true);
+
+  try {
+    const r = await fetch('/api/admin/moderate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id, action }),
+    });
+    if (!r.ok) throw new Error('Erreur ' + r.status);
+    card.classList.add('removing');
+    showToast(action === 'approve' ? '✓ Approuvé — sera visible dans Le Nid' : '✓ Rejeté');
+    setTimeout(() => {
+      card.remove();
+      const remaining = document.querySelectorAll('.submission').length;
+      document.getElementById('stat-pending').textContent = remaining;
+      if (remaining === 0) renderList({ submissions: [] });
+    }, 320);
+  } catch (e) {
+    showToast(e.message, 'error');
+    actions.forEach(b => b.disabled = false);
+  }
+}
+
+async function refresh() {
+  const token = getToken();
+  if (!token) return;
+  try {
+    const r = await fetch('/api/admin/pending', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.status === 401) { logout(); return; }
+    if (!r.ok) return;
+    const data = await r.json();
+    renderList(data);
+  } catch {}
+}
+
+/* Auto-login if token already stored */
+(async () => {
+  const token = getToken();
+  if (!token) return;
+  try {
+    const r = await fetch('/api/admin/pending', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.ok) {
+      const data = await r.json();
+      showDashboard(data);
+    } else {
+      localStorage.removeItem(TOKEN_KEY);
+    }
+  } catch {}
+})();
+</script>
+</body>
+</html>
