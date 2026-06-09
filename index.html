@@ -769,8 +769,70 @@
       transition: background .3s;
       position: relative;
       min-height: 280px;
+      overflow: hidden;
     }
     .artist:hover { background: #1c1a14; }
+
+    /* Embedded intro video — featured plays always, others on hover */
+    .artist-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .55s var(--ease);
+      z-index: 0;
+    }
+    /* Dark scrim for text legibility over the video */
+    .artist::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: linear-gradient(180deg,
+        rgba(14,13,9,.45) 0%,
+        rgba(14,13,9,.75) 55%,
+        rgba(14,13,9,.95) 100%);
+      opacity: 0;
+      transition: opacity .55s var(--ease);
+    }
+    /* Stack the textual content above the video + scrim */
+    .artist > *:not(.artist-video) {
+      position: relative;
+      z-index: 2;
+    }
+    /* Featured: always playing */
+    .artist.featured .artist-video,
+    .artist.featured::after {
+      opacity: 1;
+    }
+    /* Other cards: hover reveals video on desktop */
+    @media (hover: hover) and (pointer: fine) {
+      .artist:not(.featured):hover .artist-video,
+      .artist:not(.featured):hover::after {
+        opacity: 1;
+      }
+    }
+    /* Small video indicator on the non-featured cards */
+    .video-hint {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: rgba(244,239,228,.1);
+      border: 1px solid rgba(244,239,228,.18);
+      color: var(--paper);
+      display: grid; place-items: center;
+      font-size: .58rem;
+      z-index: 3;
+      opacity: .65;
+      transition: opacity .3s var(--ease), background .3s, transform .3s var(--ease);
+    }
+    .artist:not(.featured):hover .video-hint {
+      opacity: 0;
+      transform: scale(.85);
+    }
+    .artist.featured .video-hint { display: none; }
     .artist.featured {
       grid-column: span 1;
       background:
@@ -2241,6 +2303,8 @@
 
   <div class="roster">
     <article class="artist featured r" style="position:relative">
+      <video class="artist-video" autoplay muted loop playsinline preload="metadata"
+             src="/assets/video/intro-fraiche.mp4" aria-hidden="true"></video>
       <span class="sticker sticker-r" style="top:18px;right:18px">
         Coup de cœur<em>du label</em>
       </span>
@@ -2260,6 +2324,9 @@
     </article>
 
     <article class="artist r d1">
+      <video class="artist-video" muted loop playsinline preload="metadata"
+             src="/assets/video/intro-koba.mp4" aria-hidden="true"></video>
+      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°02</span>
         <span>Évry</span>
@@ -2270,6 +2337,9 @@
     </article>
 
     <article class="artist r d2">
+      <video class="artist-video" muted loop playsinline preload="metadata"
+             src="/assets/video/intro-frinho.mp4" aria-hidden="true"></video>
+      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°03</span>
         <span>Boulogne</span>
@@ -2280,6 +2350,9 @@
     </article>
 
     <article class="artist r">
+      <video class="artist-video" muted loop playsinline preload="metadata"
+             src="/assets/video/intro-bouba.mp4" aria-hidden="true"></video>
+      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°04</span>
         <span>Boulogne-Bnt</span>
@@ -2290,6 +2363,9 @@
     </article>
 
     <article class="artist r d1">
+      <video class="artist-video" muted loop playsinline preload="metadata"
+             src="/assets/video/intro-glaco.mp4" aria-hidden="true"></video>
+      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°05</span>
         <span>Lyon</span>
@@ -2300,6 +2376,9 @@
     </article>
 
     <article class="artist r d2">
+      <video class="artist-video" muted loop playsinline preload="metadata"
+             src="/assets/video/intro-dj-vanille.mp4" aria-hidden="true"></video>
+      <span class="video-hint" aria-hidden="true">▶</span>
       <div class="artist-mono">
         <span class="artist-num">N°06</span>
         <span>Paris</span>
@@ -3123,6 +3202,30 @@ function handleSamplePackDownload(e, btn) {
     btn.innerHTML = '✓ Inscrit à la liste d\'attente';
   }, 800);
 }
+
+/* =====================================================
+   ROSTER — hover-to-play artist intros (non-featured cards)
+   Featured card autoplays via <video autoplay> attribute.
+===================================================== */
+document.querySelectorAll('.artist:not(.featured)').forEach(card => {
+  const video = card.querySelector('.artist-video');
+  if (!video) return;
+  let leaveTimer = null;
+
+  card.addEventListener('mouseenter', () => {
+    clearTimeout(leaveTimer);
+    /* Skip the 2s cold open + number reveal — go straight to the name */
+    if (video.currentTime < 1.8 || video.currentTime > 7.5) {
+      video.currentTime = 1.8;
+    }
+    video.play().catch(() => {});
+  });
+
+  card.addEventListener('mouseleave', () => {
+    /* Tiny delay to avoid stutter when crossing card borders */
+    leaveTimer = setTimeout(() => video.pause(), 80);
+  });
+});
 
 /* Cursor-follow spotlight on tier cards */
 document.querySelectorAll('.tier').forEach(card => {
