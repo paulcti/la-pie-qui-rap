@@ -1,5 +1,7 @@
-video/
-.agents/
-.claude/
+# Anchored to repo root so it only matches the top-level Remotion
+# project — NOT assets/video/ (which we ship)
+/video/
+/.agents/
+/.claude/
+/out/
 *.log
-out/
